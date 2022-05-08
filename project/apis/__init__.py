@@ -1,7 +1,8 @@
 from flask import Blueprint
 from flask_restx import Api
+from .car import ns as CarNamespace
 
-# Create '/admin' Blueprint
+# Create '/api' Blueprint
 blueprint = Blueprint(
     'api',
     __name__,
@@ -16,3 +17,6 @@ api = Api(
     doc='/docs',
     description='Welcome to API docs!'
 )
+
+# Add Namespaces
+api.add_namespace(CarNamespace)
