@@ -26,10 +26,10 @@ def create_app():
 
 
     ''' Routes INIT '''
-    from project.routes import base_routes
-    from project.routes import auth_routes
+    from project.routes import base_routes, auth_routes, car_routes
     app.register_blueprint(base_routes.blueprint)
     app.register_blueprint(auth_routes.blueprint)
+    app.register_blueprint(car_routes.blueprint)
 
 
     ''' Rest-x INIT '''
