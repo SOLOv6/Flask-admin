@@ -1,12 +1,12 @@
-# libraries
-from flask import Flask
+# Libraries
+from flask import Flask, g
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-# flask configs
+# Flask configs
 import config
 
-# DB
+
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -23,7 +23,6 @@ def create_app():
     ''' DB INIT '''
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
-    from project.models import models
 
 
     ''' Routes INIT '''
@@ -36,6 +35,17 @@ def create_app():
     ''' Rest-x INIT '''
     from project.apis import blueprint as api
     app.register_blueprint(api)
+
+
+    ''' Request Hook '''
+    @app.before_request
+    def before_request():
+        g.db = db.session
+
+    @app.teardown_request
+    def teardown_request(exception):
+        if hasattr(g, 'db'):
+            g.db.close()
 
 
     return app

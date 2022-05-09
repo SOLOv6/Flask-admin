@@ -1,5 +1,8 @@
+# Libraries
 from flask import Blueprint
 from flask_restx import Api
+
+# Namespaces
 from .car import ns as CarNamespace
 
 # Create '/api' Blueprint
@@ -19,4 +22,4 @@ api = Api(
 )
 
 # Add Namespaces
-api.add_namespace(CarNamespace)
+api.add_namespace(CarNamespace, '/cars')

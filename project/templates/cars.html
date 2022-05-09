@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars | SOLOv6</title>
+</head>
+<body>
+    <!-- Car List -->
+    {% if car_list %}
+    <ul>
+        {% for car in car_list %}
+        <li>
+            {{ car.id }} | {{ car.car_name }} | {{ car.registered_on }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h2>❌ No Car Registered ❌</h2>
+    {% endif %}
+</body>
+</html>
