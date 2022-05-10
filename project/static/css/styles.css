@@ -1,0 +1,132 @@
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 65px;
+    padding-left: 53px;
+    padding-right: 67px;
+    z-index: 1;
+    background-color: #2A323D;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: white;
+}
+
+.navbar .container-fluid {
+    height: 65px;
+}
+
+.logo {
+    border-radius: 5px;
+    margin-right: 16px;
+}
+
+.nav-link {
+    color: white;
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.d-flex {
+    margin-top: 17px;
+}
+
+.search-btn {
+    color: white;
+    opacity: 0.5;
+    border: none;
+    margin-left: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.search-btn:hover {
+    color: white;
+    opacity: 1;
+}
+
+
+/* Car Main */
+.car-main {
+    margin-top: 66px;
+}
+
+
+/* Car Register */
+.register-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 64px;
+    padding-right: 80px;
+    width: 100vw;
+    height: 54px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 20px rgb(234, 232, 232);
+}
+
+.car-register-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+}
+
+.register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    margin: 0;
+}
+
+.register-input {
+    height: 40px;
+}
+
+.register-btn {
+    height: 40px;
+    margin-top: 16px;
+    margin-left: 5px;
+}
+
+.dropdown-toggle {
+    height: 39px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* Car List */
+.card {
+    z-index: 0;
+}
+
+.car-list-title {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.car-list-first-col,
+.car-list-second-col,
+.car-list-last-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cancel-box {
+    margin: 0;
+    padding-top: 17px;
+}
+
+.cancel-btn {
+    border-radius: 50%;
+}

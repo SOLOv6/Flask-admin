@@ -1,53 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Cars | SOLOv6</title>
-</head>
-<body>
-    <!-- Register Car -->
-    <div class="container">
-        <div class="row justify-content-end">
-            <div class="col-5">
-                <form action="{{ url_for('cars.register') }}" method="post">
-                    <input type="text" name="car_name" id="car_name" placeholder="car_name">
-                    <button type="submit" class="register-btn">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </form>
-            </div>
+<link rel="stylesheet" href="../static/css/cars.css">
+{% extends 'base.html' %}
+{% block content %}
+<!-- Car Main -->
+<div class="car-main">
+    <!-- Car Register -->
+    <div class="register-box">
+        <div class="car-register-col">
+            <form class="register-form" action="{{ url_for('cars.register') }}" method="post">
+                <input class="form-control register-input" type="text" name="car_name" placeholder="Model name...">
+                <button type="submit" class="btn btn-primary mb-3 register-btn">
+                    Register
+                </button>
+            </form>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Latest v1.0.0
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">v1.0.0</a></li>
+            </ul>
         </div>
     </div>
 
     <!-- Car List -->
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                car_id
+    <div class="container car-list-box">
+        <div class="row car-list-title-box border-bottom">
+            <div class="col car-list-title my-3">
+                Car ID
             </div>
-            <div class="col">
-                car_name
+            <div class="col car-list-title my-3">
+                Car Name
             </div>
-            <div class="col">
-                registered_on
+            <div class="col car-list-title my-3">
+                Registered On
             </div>
         </div>
         {% if car_list %}
             {% for car in car_list %}
-            <div class="row">
-                <div class="col">
-                    {{ car.id }}
-                </div>
-                <div class="col">
-                    {{ car.car_name }}
-                </div>
-                <div class="col">
-                    {{ car.registered_on }}
+            <div class="card my-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col car-list-first-col">
+                            {{ car.id }}
+                        </div>
+                        <div class="col car-list-second-col">
+                            {{ car.car_name }}
+                        </div>
+                        <div class="col car-list-last-col">
+                            {{ car.registered_on }}
+                            <div class="cancel-box">
+                                <form class="delete-form" action="{{ url_for('cars.delete') }}" method="post">
+                                    <input class="delete-car-id-input" type="hidden" name="car_id" value="{{ car.id }}">
+                                    <button type="submit" class="btn btn-danger mb-3 cancel-btn">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -59,5 +70,5 @@
         </div>
         {% endif %}
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS INIT -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- FontAwesome CSS INIT -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- SOLOv6 CSS INIT -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Favicons INIT -->
+    <link rel="shortcut icon" href="../static/images/favicons.ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="../static/images/favicons.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../static/images/favicons.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../static/images/favicons.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../static/images/favicons.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../static/images/favicons.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../static/images/favicons.icoapple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../static/images/favicons.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../static/images/favicons.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicons.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../static/images/favicons.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicons.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../static/images/favicons.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicons.ico/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- title -->
+    <title>Admin | SOLOv6</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-logo" href="{{ url_for('base.index') }}">
+                <img class="logo" src="../static/images/favicons.ico/favicon-96x96.png" alt="Logo" height="35" width="35">
+            </a>
+            <a class="navbar-brand" href="{{ url_for('base.index') }}">SOLOv6</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('base.index') }}">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('base.index') }}">Entries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('cars.cars') }}">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Users</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2 search-form" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn search-btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
