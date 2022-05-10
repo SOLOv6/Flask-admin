@@ -4,26 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Cars | SOLOv6</title>
 </head>
 <body>
     <!-- Register Car -->
-    <form action="{{ url_for('cars.register') }}" method="post">
-        <input type="text" name="car_name" id="car_name" placeholder="car_name">
-        <input type="submit" value="Register">
-    </form>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-5">
+                <form action="{{ url_for('cars.register') }}" method="post">
+                    <input type="text" name="car_name" id="car_name" placeholder="car_name">
+                    <button type="submit" class="register-btn">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Car List -->
-    {% if car_list %}
-    <ul>
-        {% for car in car_list %}
-        <li>
-            {{ car.id }} | {{ car.car_name }} | {{ car.registered_on }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <h2>❌ No Car Registered ❌</h2>
-    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                car_id
+            </div>
+            <div class="col">
+                car_name
+            </div>
+            <div class="col">
+                registered_on
+            </div>
+        </div>
+        {% if car_list %}
+            {% for car in car_list %}
+            <div class="row">
+                <div class="col">
+                    {{ car.id }}
+                </div>
+                <div class="col">
+                    {{ car.car_name }}
+                </div>
+                <div class="col">
+                    {{ car.registered_on }}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <h2>❌ No Car Registered ❌</h2>
+            </div>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>

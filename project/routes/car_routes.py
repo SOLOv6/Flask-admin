@@ -14,7 +14,7 @@ blueprint = Blueprint(
 
 @blueprint.route('/')
 def cars():
-    car_list = CarModel.query.order_by(CarModel.registered_on.desc())
+    car_list = CarModel.query.order_by(CarModel.registered_on)
     return render_template('cars.html', car_list=car_list)
 
 @blueprint.route('/register', methods=['POST'])
