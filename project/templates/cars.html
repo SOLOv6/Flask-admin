@@ -1,6 +1,41 @@
 <link rel="stylesheet" href="../static/css/cars.css">
 {% extends 'base.html' %}
 {% block content %}
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-logo" href="{{ url_for('base.index') }}">
+            <img class="logo" src="../static/images/favicons.ico/favicon-96x96.png" alt="Logo" height="35" width="35">
+        </a>
+        <a class="navbar-brand" href="{{ url_for('base.index') }}">SOLOv6</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('base.index') }}">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('base.index') }}">Entries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('cars.cars') }}">Cars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Users</a>
+                </li>
+            </ul>
+            <form id="search-form" class="d-flex" action="{{ url_for('cars.cars') }}" method="get">
+                <input id="needle search-needle" class="form-control me-2 search-form" type="text" name="needle" value="{{ needle or '' }}" placeholder="Car ID..." aria-label="Search">
+                <input id="page" type="hidden" name="page" value="{{ page }}">
+                <button id="btn-search" class="btn search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
 <!-- Car Main -->
 <div class="car-main">
     <!-- Car Register -->
@@ -37,17 +72,17 @@
             </div>
         </div>
         {% if car_list %}
-            {% for car in car_list %}
+            {% for car in car_list.items %}
             <div class="card my-2">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col car-list-first-col">
+                    <div class="row card-body-row">
+                        <div class="col car-list-col">
                             {{ car.id }}
                         </div>
-                        <div class="col car-list-second-col">
+                        <div class="col car-list-col">
                             {{ car.car_name }}
                         </div>
-                        <div class="col car-list-last-col">
+                        <div class="col car-list-col">
                             {{ car.registered_on }}
                             <div class="cancel-box">
                                 <form class="delete-form" action="{{ url_for('cars.delete') }}" method="post">
@@ -71,4 +106,53 @@
         {% endif %}
     </div>
 </div>
+
+<!-- Pagination -->
+<ul class="pagination my-4 justify-content-center">
+    {% if car_list.has_prev %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ car_list.prev_num }}">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">Previous</a>
+    </li>
+    {% endif %}
+    {% for page_num in car_list.iter_pages() %}
+    {% if page_num %}
+    {% if page_num != car_list.page %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+    </li>
+    {% else %}
+    <li class="page-item active" aria-current="page">
+        <a class="page-link" href="javascript:void(0)">{{ page_num }}</a>
+    </li>
+    {% endif %}
+    {% else %}
+    <li class="disabled">
+        <a class="page-link" href="javascript:void(0)">...</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% if car_list.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ car_list.next_num }}">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">Next</a>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+    const btn_search = document.getElementById('btn-search');
+    btn_search.addEventListener('click', function() {
+        document.getElementById('needle').value = document.getElementById('search-needle').value;
+        document.getElementById('page').value = 1;
+        document.getElementById('search-form').submit();
+    });
+</script>
 {% endblock %}

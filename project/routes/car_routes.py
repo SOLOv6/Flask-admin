@@ -12,11 +12,18 @@ blueprint = Blueprint(
     url_prefix='/cars'
 )
 
-# Cars Main
+# Get Car List API
 @blueprint.route('/')
 def cars():
-    car_list = CarModel.query.order_by(CarModel.registered_on)
-    return render_template('cars.html', car_list=car_list)
+    page = request.args.get('page', type=int, default=1)
+    needle = request.args.get('needle', type=str, default='')
+    car_list = CarModel.query.order_by(CarModel.registered_on.desc())
+    if needle:
+        car_list = car_list.filter(
+            CarModel.id.ilike(needle)
+        )
+    car_list = car_list.paginate(page, per_page=10)
+    return render_template('cars.html', car_list=car_list, page=page, needle=needle)
 
 # Register Car API
 @blueprint.route('/register', methods=['POST'])

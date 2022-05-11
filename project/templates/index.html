@@ -1,3 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-logo" href="{{ url_for('base.index') }}">
+            <img class="logo" src="../static/images/favicons.ico/favicon-96x96.png" alt="Logo" height="35" width="35">
+        </a>
+        <a class="navbar-brand" href="{{ url_for('base.index') }}">SOLOv6</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('base.index') }}">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('base.index') }}">Entries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('cars.cars') }}">Cars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Users</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2 search-form" type="search" placeholder="Search..." aria-label="Search">
+                <button class="btn search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
 {% endblock %}
