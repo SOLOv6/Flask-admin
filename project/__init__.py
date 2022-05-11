@@ -23,6 +23,8 @@ def create_app():
     ''' DB INIT '''
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
+    from .models import car
+    from .models import user
 
 
     ''' Routes INIT '''
