@@ -4,6 +4,7 @@ from flask_restx import Api
 
 # Namespaces
 from .car import ns as CarNamespace
+from .user import ns as UserNamespace
 
 # Create '/api' Blueprint
 blueprint = Blueprint(
@@ -23,3 +24,4 @@ api = Api(
 
 # Add Namespaces
 api.add_namespace(CarNamespace, '/cars')
+api.add_namespace(UserNamespace, '/users')
