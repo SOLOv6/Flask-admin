@@ -25,6 +25,7 @@ def create_app():
     migrate.init_app(app, db, render_as_batch=True)
     from .models import car
     from .models import user
+    from .models import event
 
 
     ''' Routes INIT '''

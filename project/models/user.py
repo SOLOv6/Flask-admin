@@ -2,6 +2,7 @@
 from project import db
 from sqlalchemy import func
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(10), nullable=False)
