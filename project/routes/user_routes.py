@@ -12,7 +12,7 @@ blueprint = Blueprint(
     url_prefix='/users'
 )
 
-# Get User List API
+# Get User List Route
 @blueprint.route('/')
 def users():
     page = request.args.get('page', type=int, default=1)
@@ -25,7 +25,7 @@ def users():
     user_list = user_list.paginate(page, per_page=10)
     return render_template('users.html', user_list=user_list, page=page, needle=needle)
 
-# Register User API
+# Register User Route
 @blueprint.route('/register', methods=['POST'])
 def register():
     user_name = request.form['user_name']
@@ -34,7 +34,7 @@ def register():
     g.db.commit()
     return redirect(url_for('users.users'))
 
-# Delete User API
+# Delete User Route
 @blueprint.route('/delete', methods=['POST'])
 def delete():
     user_id = request.form['user_id']

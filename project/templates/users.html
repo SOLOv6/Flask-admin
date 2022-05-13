@@ -20,7 +20,7 @@
                     <a class="nav-link active" aria-current="page" href="{{ url_for('base.index') }}">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url_for('base.index') }}">Entries</a>
+                    <a class="nav-link active" href="{{ url_for('base.index') }}">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ url_for('cars.cars') }}">Cars</a>
@@ -31,7 +31,7 @@
             </ul>
             <form id="search-form" class="d-flex" action="{{ url_for('users.users') }}" method="get">
                 <input id="needle search-needle" class="form-control me-2 search-form" type="text" name="needle" value="{{ needle or '' }}" placeholder="User ID..." aria-label="Search">
-                <input id="page" type="hidden" name="page" value="{{ page }}">
+                <input id="page" type="hidden" name="page" value=1>
                 <button id="btn-search" class="btn search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                 </button>

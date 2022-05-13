@@ -12,7 +12,7 @@ blueprint = Blueprint(
     url_prefix='/cars'
 )
 
-# Get Car List API
+# Get Car List Route
 @blueprint.route('/')
 def cars():
     page = request.args.get('page', type=int, default=1)
@@ -25,7 +25,7 @@ def cars():
     car_list = car_list.paginate(page, per_page=10)
     return render_template('cars.html', car_list=car_list, page=page, needle=needle)
 
-# Register Car API
+# Register Car Route
 @blueprint.route('/register', methods=['POST'])
 def register():
     car_name = request.form['car_name']
@@ -34,7 +34,7 @@ def register():
     g.db.commit()
     return redirect(url_for('cars.cars'))
 
-# Delete Car API
+# Delete Car Route
 @blueprint.route('/delete', methods=['POST'])
 def delete():
     car_id = request.form['car_id']
