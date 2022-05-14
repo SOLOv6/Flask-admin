@@ -1,6 +1,8 @@
 # Libraries
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, g
 
+# DB Models
+from project.models.event import Event as EventModel
 
 blueprint = Blueprint(
     'base',
@@ -9,4 +11,9 @@ blueprint = Blueprint(
 
 @blueprint.route('/')
 def index():
-    return render_template('index.html')
+    input_from = request.args.get('input_from', default=None)
+    input_to = request.args.get('input_to', default=None)
+    event_list = EventModel.query.order_by(EventModel.created_on.desc())
+    if input_from and input_to:
+        return render_template('index.html', event_list=event_list, input_from=input_from, input_to=input_to)
+    return render_template('index.html', event_list=event_list, input_from=input_from, input_to=input_to)

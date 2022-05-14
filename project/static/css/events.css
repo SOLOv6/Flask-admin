@@ -1,0 +1,68 @@
+/* Navbar */
+.navbar-nav .nav-item:nth-child(2) .nav-link {
+    opacity: 1;
+}
+
+/* Calendar */
+#calendar-box {
+    background-color: #fefefe;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 76px;
+    padding-right: 78px;
+    width: 100vw;
+    height: 60px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 20px rgb(234 232 232);
+}
+
+#calendar-container {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 54px;
+}
+
+#calendar-form {
+    height: 48px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    box-shadow: 0px 2px 20px rgb(234, 232, 232);
+}
+
+#input_from, #input_to {
+    width: 150px;
+    height: 28px;
+    margin-top: 3px;
+}
+
+#input_from {
+    margin-right: 5px;
+    border: none;
+    border-radius: 0;
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+#input_from:hover, #input_from:focus {
+    border-right: 2px solid rgba(0, 0, 0, 0.5);
+    transition: border-right 0.3s ease-in-out;
+}
+
+#input_to {
+    margin-right: 5px;
+    border: none;
+    border-radius: 0;
+}
+
+#calendar-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+}
