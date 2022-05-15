@@ -62,19 +62,98 @@
             </form>
         </div>
     </div>
-    
+
     <!-- Main_List -->
     <div class="container list-box">
         <div class="row list-title-box border-bottom">
+            <div class="col-3 list-title my-3 me-5">
+                Event ID
+            </div>
+            <div class="col-3 list-title my-3 me-5">
+                Created On
+            </div>
+            <div class="col-2 list-title my-3 ms-4">
+                User ID
+            </div>
             <div class="col list-title my-3">
                 Car ID
             </div>
-            <div class="col list-title my-3">
-                Car Name
+        </div>
+        {% if event_list %}
+            {% for event in event_list.items %}
+            <div class="card my-2">
+                <div class="card-body">
+                    <div class="row card-body-row">
+                        <div class="col-3 list-col me-2">
+                            {{ event.id }}
+                        </div>
+                        <div class="col-4 list-col">
+                            {{ event.created_on }}
+                        </div>
+                        <div class="col list-col me-5">
+                            {{ event.user_id }}
+                        </div>
+                        <div class="col list-col ms-4">
+                            {{ event.car_id }}
+                        </div>
+                        <div class="col detail-box">
+                            <form class="detail-form" action="#" method="get">
+                                <input class="detail-event-id-input" type="hidden" name="event_id" value="{{ event.id }}">
+                                <button type="submit" class="btn btn-secondary mb-3 detail-btn">
+                                    <i class="fa-solid fa-info"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col list-title my-3">
-                Registered On
+            {% endfor %}
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <h2>❌ No Event Created ❌</h2>
             </div>
         </div>
+        {% endif %}
+    </div>
 </div>
+
+<!-- Pagination -->
+<ul class="pagination my-4 justify-content-center">
+    {% if event_list.has_prev %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ event_list.prev_num }}">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">Previous</a>
+    </li>
+    {% endif %}
+    {% for page_num in event_list.iter_pages() %}
+    {% if page_num %}
+    {% if page_num != event_list.page %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+    </li>
+    {% else %}
+    <li class="page-item active" aria-current="page">
+        <a class="page-link" href="javascript:void(0)">{{ page_num }}</a>
+    </li>
+    {% endif %}
+    {% else %}
+    <li class="disabled">
+        <a class="page-link" href="javascript:void(0)">...</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% if event_list.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ event_list.next_num }}">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">Next</a>
+    </li>
+    {% endif %}
+</ul>
 {% endblock %}

@@ -11,9 +11,11 @@ blueprint = Blueprint(
 
 @blueprint.route('/')
 def index():
-    input_from = request.args.get('input_from')
-    input_to = request.args.get('input_to')
+    input_from = request.args.get('input_from', default=None)
+    input_to = request.args.get('input_to', default=None)
+    page = request.args.get('page',type=int ,default=1)
     event_list = EventModel.query.order_by(EventModel.created_on.desc())
     if input_from and input_to:
-        return render_template('index.html', event_list=event_list, input_from=input_from, input_to=input_to)
-    return render_template('index.html', event_list=event_list)
+        pass
+    event_list = event_list.paginate(page, per_page=10)
+    return render_template('index.html', event_list=event_list, page=page)
