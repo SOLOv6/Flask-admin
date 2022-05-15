@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}
-<!-- DatePicker CSS INIT -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="../static/css/rome.css">
-<link rel="stylesheet" href="../static/css/style.css">
+<!-- CSS INIT -->
 <link rel="stylesheet" href="../static/css/events.css">
-
-<!-- DatePicker JS INIT -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}
 
 {% block content %}
@@ -36,9 +30,10 @@
                     <a class="nav-link active" href="{{ url_for('users.users') }}">Users</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2 search-form" type="search" placeholder="Search..." aria-label="Search">
-                <button class="btn search-btn" type="submit">
+            <form id="search-form" class="d-flex" action="#" method="get">
+                <input id="needle search-needle" class="form-control me-2 search-form" type="text" name="needle" value="{{ needle or '' }}" placeholder="Search..." aria-label="Search">
+                <input id="page" type="hidden" name="page" value=1>
+                <button id="btn-search" class="btn search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                 </button>
             </form>
@@ -49,40 +44,37 @@
 <!-- Main -->
 <div class="main">
     <!-- Main_Calendar -->
-    <div class="content" id="calendar-box">
-        <div class="container text-left" id="calendar-container">
-            <form action="#" class="row" id="calendar-form" method="get">
-                <input type="text" class="form-control" id="input_from date_from" placeholder="From" name="input_from">
-                <input type="text" class="form-control" id="input_to date_to" placeholder="To" name="input_to">
-                <button type="submit" class="btn btn-primary mb-3" id="calendar-btn">
-                    <i class="fa-solid fa-magnifying-glass fa-sm" id="calendar-search-btn"></i>
-                </button>
+    <div class="calendar-box">
+        <div class="calendar-col">
+            <form class="row calendar-form" action="{{ url_for('base.index') }}" method="get">
+                <div class="col calendar-input-box">
+                    <label for="startDate" id="input_from" class="calendar-input-label">From</label>
+                    <input id="startDate" class="form-control calendar-input" type="date" name="input_from"/>
+                    <div id="calendar-input-bar"></div>
+                    <label for="endDate" id="input_to" class="calendar-input-label">To</label>
+                    <input id="endDate" class="form-control calendar-input" type="date" name="input_to"/>
+                </div>
+                <div class="col calendar-btn-box">
+                    <button type="submit" class="btn btn-primary mb-3 calendar-btn">
+                        <i class="fa-solid fa-magnifying-glass fa-sm"></i>
+                    </button>
+                </div>
             </form>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Latest v1.0.0
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">v1.0.0</a></li>
-            </ul>
-        </div>
     </div>
-
-    <!-- Main_List -->
     
+    <!-- Main_List -->
+    <div class="container list-box">
+        <div class="row list-title-box border-bottom">
+            <div class="col list-title my-3">
+                Car ID
+            </div>
+            <div class="col list-title my-3">
+                Car Name
+            </div>
+            <div class="col list-title my-3">
+                Registered On
+            </div>
+        </div>
 </div>
-{% endblock %}
-{% block script %}
-<script src="../static/js/popper.min.js"></script>
-<script src="../static/js/rome.js"></script>
-<script src="../static/js/main.js"></script>
-<script type="text/javascript">
-    const calendar_btn = document.getElementById('calendar-btn');
-    calendar_btn.addEventListener('click', function() {
-        document.getElementById('input_from').value = document.getElementById('date_from').value;
-        document.getElementById('input_to').value = document.getElementById('date_to').value;
-        document.getElementById('calendar-form').submit();
-    });
-</script>
 {% endblock %}
