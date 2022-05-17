@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block head %}
+<!-- CSS INIT -->
+<link rel="stylesheet" href="../static/css/detail.css">
+{% endblock %}
+
+{% block content %}
+{% if event.id %}
+<h1>Event ID</h1>
+<h3>{{ event.id }}</h3>
+{% else %}
+<h1>No Event ID</h1>
+{% endif %}
+{% endblock %}

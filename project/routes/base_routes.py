@@ -10,12 +10,18 @@ blueprint = Blueprint(
     __name__
 )
 
+# Get Event List Route
 @blueprint.route('/')
 def index():
-    input_from = request.args.get('input_from', default=None)
-    input_to = request.args.get('input_to', default=None)
-    page = request.args.get('page',type=int ,default=1)
+    input_from = request.args.get('input_from', default='')
+    input_to = request.args.get('input_to', default='')
+    page = request.args.get('page', type=int ,default=1)
+    needle = request.args.get('needle', type=str, default='')
     event_list = EventModel.query.order_by(EventModel.created_on.desc())
+    if needle:
+        event_list = event_list.filter(
+            EventModel.id.ilike(needle)
+        )
     if input_from and input_to:
         event_list = event_list.filter(and_
             (func.date(EventModel.created_on) >= input_from),
@@ -23,3 +29,8 @@ def index():
         )
     event_list = event_list.paginate(page, per_page=10)
     return render_template('index.html', event_list=event_list, page=page)
+
+# Get Event Detail Route
+@blueprint.route('/detail/<int:id>')
+def detail(id):
+    pass
