@@ -98,8 +98,7 @@
                             {{ event.car_id }}
                         </div>
                         <div class="col detail-box">
-                            <form class="detail-form" action="#" method="get">
-                                <input class="detail-event-id-input" type="hidden" name="event_id" value="{{ event.id }}">
+                            <form class="detail-form" action="{{ url_for('base.detail', id=event.id) }}" method="get">
                                 <button type="submit" class="btn btn-secondary mb-3 detail-btn">
                                     <i class="fa-solid fa-info"></i>
                                 </button>

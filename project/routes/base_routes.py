@@ -4,6 +4,7 @@ from sqlalchemy import and_, func
 
 # DB Models
 from project.models.event import Event as EventModel
+from project.models.entry import Entry as EntryModel
 
 blueprint = Blueprint(
     'base',
@@ -33,4 +34,5 @@ def index():
 # Get Event Detail Route
 @blueprint.route('/detail/<int:id>')
 def detail(id):
-    pass
+    entry = EntryModel.query.filter(EntryModel.event_id == id).first()
+    return render_template('detail.html', entry=entry)
