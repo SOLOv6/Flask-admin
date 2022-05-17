@@ -18,6 +18,7 @@ event = ns.model('Event',{
     'id': fields.Integer(required=True, description='event_id'),
     'user_id': fields.Integer(required=True, description='user_id'),
     'car_id': fields.Integer(required=True, description='car_id'),
+    'path_original': fields.String(required=True, description='path_original'),
     'created_on': fields.DateTime(description='created_on'),
     'is_damaged': fields.Boolean(description='is_damaged'),
 })
@@ -26,6 +27,7 @@ event = ns.model('Event',{
 post_parser = reqparse.RequestParser()
 post_parser.add_argument('user_id', required=True, help='user_id', location='form')
 post_parser.add_argument('car_id', required=True, help='car_id', location='form')
+post_parser.add_argument('path_original', required=True, help='path_original', location='form')
 
 
 # /api/events
@@ -44,6 +46,7 @@ class EventList(Resource):
         args = post_parser.parse_args()
         user_id = args['user_id']
         car_id = args['car_id']
+        path_original = args['path_original']
         
         # Validation
         user = UserModel.query.get(user_id)
@@ -53,7 +56,7 @@ class EventList(Resource):
         if car is None:
             ns.abort(403, 'Car does not exist.')
 
-        event = EventModel(user_id=user_id, car_id=car_id)
+        event = EventModel(user_id=user_id, car_id=car_id, path_original=path_original)
         g.db.add(event)
         g.db.commit()
         return event, 201
