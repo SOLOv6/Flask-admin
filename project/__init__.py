@@ -37,6 +37,7 @@ def create_app():
     from .models import car
     from .models import user
     from .models import event
+    from .models import entry
 
 
     ''' Routes INIT '''
