@@ -1,0 +1,51 @@
+/* Main_Header */
+.header-box {
+    height: 70px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 20px rgb(234, 232, 232);
+}
+
+.header-row {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-title {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+/* Main_Content */
+.card {
+    height: 180px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-info {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.content-box {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info-box {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+.card-img-top {
+    width: 200px;
+    height: 200px;
+}
+
+.message {
+    text-align: center;
+}

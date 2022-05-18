@@ -82,6 +82,7 @@
         </div>
         {% if event_list %}
             {% for event in event_list.items %}
+            {% if event.is_damaged == False %}
             <div class="card my-2">
                 <div class="card-body">
                     <div class="row card-body-row">
@@ -107,6 +108,33 @@
                     </div>
                 </div>
             </div>
+            {% elif event.is_damaged == True %}
+            <div class="card my-2">
+                <div class="card-body background-red">
+                    <div class="row card-body-row">
+                        <div class="col-3 list-col me-2">
+                            {{ event.id }}
+                        </div>
+                        <div class="col-4 list-col">
+                            {{ event.created_on }}
+                        </div>
+                        <div class="col list-col me-5">
+                            {{ event.user_id }}
+                        </div>
+                        <div class="col list-col ms-4">
+                            {{ event.car_id }}
+                        </div>
+                        <div class="col detail-box">
+                            <form class="detail-form" action="{{ url_for('base.detail', id=event.id) }}" method="get">
+                                <button type="submit" class="btn btn-secondary mb-3 detail-btn">
+                                    <i class="fa-solid fa-info"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             {% endfor %}
         {% else %}
         <div class="row">

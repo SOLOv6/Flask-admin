@@ -92,3 +92,7 @@
     align-items: center;
     border-radius: 50%;
 }
+
+.background-red {
+    background-color: #e58a8d;
+}
