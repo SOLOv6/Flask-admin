@@ -1,6 +1,6 @@
 # Libraries
 from flask import Blueprint, render_template, request, g
-from sqlalchemy import and_, func
+from sqlalchemy import and_, or_, func
 
 # DB Models
 from project.models.event import Event as EventModel
@@ -18,7 +18,12 @@ def index():
     input_to = request.args.get('input_to', default='')
     page = request.args.get('page', type=int ,default=1)
     needle = request.args.get('needle', type=str, default='')
-    event_list = EventModel.query.order_by(EventModel.created_on.desc())
+    event_list = EventModel.query.filter(
+        EventModel.is_damaged != None
+    ).order_by(
+        EventModel.created_on.desc()
+    )
+
     if needle:
         event_list = event_list.filter(
             EventModel.id.ilike(needle)

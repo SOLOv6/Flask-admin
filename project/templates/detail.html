@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-{% if entry.event.id %}
+{% if entry %}
 <h1>Event ID</h1>
 <h3>{{ entry.event.id }}</h3>
 {% else %}
-<h1>No Event ID</h1>
+<h1>No Entry Created</h1>
 {% endif %}
 {% endblock %}

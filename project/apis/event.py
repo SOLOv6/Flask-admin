@@ -1,6 +1,6 @@
 # Libraries
 from flask import g
-from flask_restx import Namespace, Resource, fields, reqparse
+from flask_restx import Namespace, Resource, fields, reqparse, inputs
 
 # DB Models
 from project.models.event import Event as EventModel
@@ -28,6 +28,7 @@ post_parser = reqparse.RequestParser()
 post_parser.add_argument('user_id', required=True, help='user_id', location='form')
 post_parser.add_argument('car_id', required=True, help='car_id', location='form')
 post_parser.add_argument('path_original', required=True, help='path_original', location='form')
+post_parser.add_argument('is_damaged', required=False, type=inputs.boolean, help='is_damaged', location='form')
 
 
 # /api/events
@@ -47,6 +48,7 @@ class EventList(Resource):
         user_id = args['user_id']
         car_id = args['car_id']
         path_original = args['path_original']
+        is_damaged = args['is_damaged']
         
         # Validation
         user = UserModel.query.get(user_id)
@@ -56,7 +58,7 @@ class EventList(Resource):
         if car is None:
             ns.abort(403, 'Car does not exist.')
 
-        event = EventModel(user_id=user_id, car_id=car_id, path_original=path_original)
+        event = EventModel(user_id=user_id, car_id=car_id, path_original=path_original, is_damaged=is_damaged)
         g.db.add(event)
         g.db.commit()
         return event, 201

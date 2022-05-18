@@ -59,7 +59,7 @@ class EntryList(Resource):
         # Validation
         event = EventModel.query.get(event_id)
         if event is None:
-            ns.abort(403, 'Event does not exist.')
+            ns.abort(400, 'Event does not exist.')
 
         entry = EntryModel(
             event_id=event_id,
