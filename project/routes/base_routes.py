@@ -1,5 +1,5 @@
 # Libraries
-from flask import Blueprint, render_template, request, g
+from flask import Blueprint, redirect, render_template, request, g, url_for
 from sqlalchemy import and_, func
 
 # DB Models
@@ -44,3 +44,17 @@ def detail(id):
         return render_template('detail.html', entry=entry)    
     path_inference_list = entry.path_inference_dent.split('_')[:-1]
     return render_template('detail.html', entry=entry, path_inference_list=path_inference_list)
+
+# Confirm Inspection
+@blueprint.route('/detail/<int:id>/confirm', methods=['POST'])
+def confirm(id):
+    if request.method == 'POST':
+        inspector = request.form['inspector']
+        inspected_on = func.now()
+        is_inspected = True
+        entry = EntryModel.query.filter(EntryModel.event_id == id).first()
+        entry.inspector = inspector
+        entry.inspected_on = inspected_on
+        entry.is_inspected = is_inspected
+        g.db.commit()
+        return redirect(url_for('base.detail', id=id))

@@ -80,7 +80,7 @@
                         {% if entry.is_inspected %}
                         <h5 class="inspector-box-status-text confirm-disabled">Confirmed! <i class="fa-solid fa-check check-icon"></i></h5>
                         {% else %}
-                        <form action="#" method="post">
+                        <form action="{{ url_for('base.confirm', id=entry.event.id) }}" method="post">
                             <input class="inspector-input" type="hidden" name="inspector" value="Admin">
                             <button type="submit" class="btn mb-3 btn-success confirm-btn">
                                 Confirmed! <i class="fa-solid fa-check check-icon"></i>
@@ -92,21 +92,37 @@
             </div>
         </div>
         <div class="info-box mt-3 mb-4">
-            <div class="info-image-box">
+            <div class="info-image-box ps-4 pe-4">
+                <div class="row info-image-box-row mt-2">
+                    <div class="col-2 info-image-box-col ms-3">dent</div>
+                    <div class="col-2 info-image-box-col ms-2">scratch</div>
+                    <div class="col-2 info-image-box-col ms-1 me-5">spacing</div>
+                    <div class="col-2 info-image-box-col ms-3">is_inferenced</div>
+                    <div class="col-2 info-image-box-col ms-5">inspect</div>
+                </div>
                 {% for path_inference in path_inference_list %}
                 <div class="content-box mt-2">
-                    <div class="card mb-5 image-card">
+                    <div class="card mb-3 ms-2 me-2 mt-3 image-card">
                         <img src="../static/data/path_inference_dent/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="card mb-5 image-card">
+                    <div class="card mb-3 ms-2 me-2 mt-3 image-card">
                         <img src="../static/data/path_inference_scratch/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="card mb-5 image-card">
+                    <div class="card mb-3 ms-2 me-5 mt-3 image-card">
                         <img src="../static/data/path_inference_spacing/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="is_inferenced-box mb-5">
+                    <div class="is_inferenced-box">
                         <h4>{{ entry.is_inferenced }}</h4>
                     </div>
+                    {% if entry.is_inspected %}
+                    <div class="inspect-box">
+                        <form class="inspect-form" action="#" method="get">
+                            <button type="button" class="btn btn-primary inspect-btn" disabled>
+                                Inspect
+                            </button>
+                        </form>
+                    </div>
+                    {% else %}
                     <div class="inspect-box">
                         <form class="inspect-form" action="#" method="get">
                             <input class="inspect-path-original" type="hidden" name="path-original" value="{{ path_inference }}.jpeg">
@@ -115,6 +131,7 @@
                             </button>
                         </form>
                     </div>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
