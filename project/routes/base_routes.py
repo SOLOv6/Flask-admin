@@ -40,5 +40,7 @@ def index():
 @blueprint.route('/detail/<int:id>')
 def detail(id):
     entry = EntryModel.query.filter(EntryModel.event_id == id).first()
+    if entry is None:
+        return render_template('detail.html', entry=entry)    
     path_inference_list = entry.path_inference_dent.split('_')[:-1]
     return render_template('detail.html', entry=entry, path_inference_list=path_inference_list)

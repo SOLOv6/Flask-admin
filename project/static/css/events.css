@@ -73,6 +73,11 @@
 }
 
 /* Main_List */
+.list-title-box {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
 .detail-box {
     position: relative;
 }

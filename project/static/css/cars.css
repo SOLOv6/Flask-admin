@@ -1,3 +1,8 @@
 .navbar-nav .nav-item:nth-child(3) .nav-link {
     opacity: 1;
 }
+
+.list-title-box {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}

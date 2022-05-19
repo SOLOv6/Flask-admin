@@ -1,6 +1,7 @@
 # Libraries
 from flask import g
-from flask_restx import Namespace, Resource, fields, reqparse
+from flask_restx import Namespace, Resource, fields, reqparse, inputs
+from sqlalchemy import func
 
 # DB Models
 from project.models.event import Event as EventModel
@@ -35,6 +36,15 @@ post_parser.add_argument('event_id', required=True, help='event_id', location='f
 post_parser.add_argument('path_inference_dent', required=True, help='path_inference_dent', location='form')
 post_parser.add_argument('path_inference_scratch', required=True, help='path_inference_scratch', location='form')
 post_parser.add_argument('path_inference_spacing', required=True, help='path_inference_spacing', location='form')
+
+# Create Put Parser for Confirm
+put_parser = post_parser.copy()
+put_parser.remove_argument('event_id')
+put_parser.remove_argument('path_inference_dent')
+put_parser.remove_argument('path_inference_scratch')
+put_parser.remove_argument('path_inference_spacing')
+put_parser.add_argument('is_inspected', required=True, type=inputs.boolean , help='is_inspected', location='form')
+put_parser.add_argument('inspector', required=True, help='inspector', location='form')
 
 
 # /api/entries
@@ -81,3 +91,15 @@ class Entry(Resource):
         g.db.delete(entry)
         g.db.commit()
         return '', 204
+
+    @ns.expect(put_parser)
+    @ns.marshal_list_with(entry, skip_none=True)
+    def put(self, id):
+        """Inspect Confirm"""
+        args = put_parser.parse_args()
+        entry = EntryModel.query.get_or_404(id)
+        entry.is_inspected = args['is_inspected']
+        entry.inspector = args['inspector']
+        entry.inspected_on = func.now()
+        g.db.commit()
+        return entry, 200

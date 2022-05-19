@@ -2,10 +2,6 @@
 {% block head %}
 <!-- CSS INIT -->
 <link rel="stylesheet" href="../static/css/detail.css">
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -51,35 +47,76 @@
     </div>
 
     <!-- Main_Content -->
-    <div class="container">
+    <div class="container main-content">
         <div class="card detail-box mt-3">
-            <div class="card-body">
-                <h2 class="card-title event-id card-info"><strong>Event ID :</strong> {{ entry.event.id }}</h2>
-                <h4 class="card-subtitle mb-2 text-muted event-date card-info"><strong>Date :</strong> {{ entry.event.created_on }}</h4>
-                <h4 class="card-text text-muted event-user card-info">
-                    <strong>User ID :</strong> {{ entry.event.user_id }}<br>
-                    <strong>Car ID :</strong> {{ entry.event.car_id }}
-                </h4>
+            <div class="detail-box-body">
+                <div class="detail-box-left">
+                    <h2 class="detail-box-title event-id card-info"><strong>Event ID :</strong> {{ entry.event.id }}</h2>
+                    <h4 class="detail-box-subtitle mb-2 text-muted event-date card-info"><strong>Date :</strong> {{ entry.event.created_on }}</h4>
+                    <h4 class="detail-box-text text-muted event-user card-info">
+                        <strong>User ID :</strong> {{ entry.event.user_id }}<br>
+                        <strong>Car ID :</strong> {{ entry.event.car_id }}
+                    </h4>
+                </div>
+                <div class="detail-box-right">
+                    <div class="inspected-on-box">
+                        <h4 class="inspected-on-box-title">Inspected On</h4>
+                        {% if entry.inspected_on %}
+                        <h5 class="inspected-on-box-text">{{ entry.inspected_on }}</h5>
+                        {% else %}
+                        <h5 class="inspected-on-box-text">-</h5>
+                        {% endif %}
+                    </div>
+                    <div class="inspector-box">
+                        <h4 class="inspector-box-title">Inspector</h4>
+                        {% if entry.inspector %}
+                        <h5 class="inspector-box-text">{{ entry.inspector }}</h5>
+                        {% else %}
+                        <h5 class="inspector-box-text">-</h5>
+                        {% endif %}
+                    </div>
+                    <div class="inspector-box-status">
+                        <h4 class="inspector-box-status-title">Status</h4>
+                        {% if entry.is_inspected %}
+                        <h5 class="inspector-box-status-text confirm-disabled">Confirmed! <i class="fa-solid fa-check check-icon"></i></h5>
+                        {% else %}
+                        <form action="#" method="post">
+                            <input class="inspector-input" type="hidden" name="inspector" value="Admin">
+                            <button type="submit" class="btn mb-3 btn-success confirm-btn">
+                                Confirmed! <i class="fa-solid fa-check check-icon"></i>
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="info-box mt-3 mb-4">
             <div class="info-image-box">
                 {% for path_inference in path_inference_list %}
                 <div class="content-box mt-2">
-                    <div class="card mb-5">
+                    <div class="card mb-5 image-card">
                         <img src="../static/data/path_inference_dent/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="card mb-5">
+                    <div class="card mb-5 image-card">
                         <img src="../static/data/path_inference_scratch/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="card mb-5">
+                    <div class="card mb-5 image-card">
                         <img src="../static/data/path_inference_spacing/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
+                    </div>
+                    <div class="is_inferenced-box mb-5">
+                        <h4>{{ entry.is_inferenced }}</h4>
+                    </div>
+                    <div class="inspect-box">
+                        <form class="inspect-form" action="#" method="get">
+                            <input class="inspect-path-original" type="hidden" name="path-original" value="{{ path_inference }}.jpeg">
+                            <button type="submit" class="btn btn-primary mb-3 inspect-btn">
+                                Inspect
+                            </button>
+                        </form>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-            <div class="info-content-box">
-                
             </div>
         </div>
     </div>
