@@ -26,8 +26,9 @@ def index():
 
     if needle:
         event_list = event_list.filter(
-            EventModel.id.ilike(needle)
+            EventModel.car_id == needle
         )
+
     if input_from and input_to:
         event_list = event_list.filter(and_
             (func.date(EventModel.created_on) >= input_from),

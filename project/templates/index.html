@@ -30,13 +30,6 @@
                     <a class="nav-link active" href="{{ url_for('users.users') }}">Users</a>
                 </li>
             </ul>
-            <form id="search-form" class="d-flex" action="{{ url_for('base.index') }}" method="get">
-                <input id="needle search-needle" class="form-control me-2 search-form" type="text" name="needle" value="{{ needle or '' }}" placeholder="Event ID..." aria-label="Search">
-                <input id="page" type="hidden" name="page" value=1>
-                <button id="btn-search" class="btn search-btn" type="submit">
-                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-                </button>
-            </form>
         </div>
     </div>
 </nav>
@@ -49,10 +42,12 @@
             <form class="row calendar-form" action="{{ url_for('base.index') }}" method="get">
                 <div class="col calendar-input-box">
                     <label for="startDate" id="input_from" class="calendar-input-label">From</label>
-                    <input id="startDate" class="form-control calendar-input" type="date" name="input_from" value="''"/>
+                    <input id="startDate" class="form-control calendar-input" type="date" name="input_from" value="{{ input_from or '' }}"/>
                     <div id="calendar-input-bar"></div>
                     <label for="endDate" id="input_to" class="calendar-input-label">To</label>
-                    <input id="endDate" class="form-control calendar-input" type="date" name="input_to" value="''"/>
+                    <input id="endDate" class="form-control calendar-input" type="date" name="input_to" value="{{ input_to or '' }}"/>
+                    <div id="calendar-input-bar"></div>
+                    <input id="needle search-needle" class="form-control calendar-input" type="text" name="needle" value="{{ needle or '' }}" placeholder="Car ID..." aria-label="Search">
                     <input id="page" type="hidden" name="page" value=1>
                 </div>
                 <div class="col calendar-btn-box">
@@ -216,12 +211,4 @@
 </ul>
 {% endblock %}
 {% block script %}
-<script type="text/javascript">
-    const btn_search = document.getElementById('btn-search');
-    btn_search.addEventListener('click', function() {
-        document.getElementById('needle').value = document.getElementById('search-needle').value;
-        document.getElementById('page').value = 1;
-        document.getElementById('search-form').submit();
-    });
-</script>
 {% endblock %}
