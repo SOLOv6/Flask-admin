@@ -21,6 +21,7 @@ event = ns.model('Event',{
     'path_original': fields.String(required=True, description='path_original'),
     'created_on': fields.DateTime(description='created_on'),
     'is_damaged': fields.Boolean(description='is_damaged'),
+    'conf_score': fields.Float(description='confidence_score'),
 })
 
 # Create Post Parser
@@ -29,6 +30,7 @@ post_parser.add_argument('user_id', required=True, help='user_id', location='for
 post_parser.add_argument('car_id', required=True, help='car_id', location='form')
 post_parser.add_argument('path_original', required=True, help='path_original', location='form')
 post_parser.add_argument('is_damaged', required=False, type=inputs.boolean, help='is_damaged', location='form')
+post_parser.add_argument('conf_score', required=False, help='confidence_score', location='form')
 
 
 # /api/events
@@ -49,6 +51,7 @@ class EventList(Resource):
         car_id = args['car_id']
         path_original = args['path_original']
         is_damaged = args['is_damaged']
+        conf_score = args['conf_score']
         
         # Validation
         user = UserModel.query.get(user_id)
@@ -58,7 +61,13 @@ class EventList(Resource):
         if car is None:
             ns.abort(403, 'Car does not exist.')
 
-        event = EventModel(user_id=user_id, car_id=car_id, path_original=path_original, is_damaged=is_damaged)
+        event = EventModel(
+            user_id=user_id,
+            car_id=car_id,
+            path_original=path_original,
+            is_damaged=is_damaged,
+            conf_score=conf_score
+        )
         g.db.add(event)
         g.db.commit()
         return event, 201
