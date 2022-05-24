@@ -324,4 +324,7 @@ pip-selfcheck.json
 # Ignore code-workspaces
 *.code-workspace
 
+# keys
+keys/*.json
+
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,virtualenv,venv,visualstudiocode,macos
