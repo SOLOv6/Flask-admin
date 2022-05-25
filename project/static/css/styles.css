@@ -150,3 +150,19 @@
 .cancel-btn {
     margin-top: 8px;
 }
+
+
+/* Error page */
+.error-icon-title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-icon img {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 4px rgb(207, 204, 204);
+}
