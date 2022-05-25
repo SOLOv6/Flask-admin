@@ -26,14 +26,20 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 
-def create_app():
+def create_app(config=None):
     print('run: create_app()')
     app = Flask(__name__)
 
-
     ''' Flask Configs '''
-    app.config.from_envvar('APP_CONFIG_FILE')
+    from .configs import DevelopmentConfig, ProductionConfig
+    if not config:
+        if app.config['DEBUG']:
+            config = DevelopmentConfig()
+        else:
+            config = ProductionConfig()
 
+    print('run with', config)
+    app.config.from_object(config)
 
     ''' DB INIT '''
     db.init_app(app)
@@ -41,11 +47,6 @@ def create_app():
         migrate.init_app(app, db, render_as_batch=True)
     else:
         migrate.init_app(app, db)
-    from .models import car
-    from .models import user
-    from .models import event
-    from .models import entry
-
 
     ''' Routes INIT '''
     from project.routes import base_routes, auth_routes, car_routes, user_routes
