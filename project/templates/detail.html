@@ -124,8 +124,8 @@
                     </div>
                     {% else %}
                     <div class="inspect-box">
-                        <form class="inspect-form" action="#" method="get">
-                            <input class="inspect-path-original" type="hidden" name="path-original" value="{{ path_inference }}.jpeg">
+                        <form class="inspect-form" action="{{ url_for('base.inspect') }}" method="get">
+                            <input class="inspect-path-original" type="hidden" name="path_original" value="{{ path_inference }}.jpeg">
                             <button type="submit" class="btn btn-primary mb-3 inspect-btn">
                                 Inspect
                             </button>

@@ -46,6 +46,12 @@ def detail(id):
     path_inference_list = entry.path_inference_dent.split('_')[:-1]
     return render_template('detail.html', entry=entry, path_inference_list=path_inference_list)
 
+# Get Event Inspect Route
+@blueprint.route('/detail/inspect')
+def inspect():
+    path_original = request.args['path_original']
+    return render_template('via.html')
+
 # Confirm Inspection
 @blueprint.route('/detail/<int:id>/confirm', methods=['POST'])
 def confirm(id):
