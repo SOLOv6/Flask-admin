@@ -7,7 +7,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     car_id = db.Column(db.Integer, db.ForeignKey('car.id', ondelete='CASCADE'))
-    path_original = db.Column(db.String(100), unique=True, nullable=False)
+    path_original = db.Column(db.String(200), unique=True, nullable=False)
     created_on = db.Column(db.DateTime(), default=func.now())
     is_damaged = db.Column(db.Boolean(), nullable=True)
     conf_score = db.Column(db.Float, nullable=True)

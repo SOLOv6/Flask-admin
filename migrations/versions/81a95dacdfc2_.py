@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9b28e03eee98
+Revision ID: 81a95dacdfc2
 Revises: 
-Create Date: 2022-05-26 01:17:20.884324
+Create Date: 2022-05-27 01:03:21.710187
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9b28e03eee98'
+revision = '81a95dacdfc2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,7 +34,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('car_id', sa.Integer(), nullable=True),
-    sa.Column('path_original', sa.String(length=100), nullable=False),
+    sa.Column('path_original', sa.String(length=200), nullable=False),
     sa.Column('created_on', sa.DateTime(), nullable=True),
     sa.Column('is_damaged', sa.Boolean(), nullable=True),
     sa.Column('conf_score', sa.Float(), nullable=True),
@@ -48,14 +48,14 @@ def upgrade():
     sa.Column('event_id', sa.Integer(), nullable=False),
     sa.Column('is_inferenced', sa.Boolean(), nullable=False),
     sa.Column('inferenced_on', sa.DateTime(), nullable=True),
-    sa.Column('path_inference_dent', sa.String(length=100), nullable=False),
-    sa.Column('path_inference_scratch', sa.String(length=100), nullable=False),
-    sa.Column('path_inference_spacing', sa.String(length=100), nullable=False),
+    sa.Column('path_inference_dent', sa.String(length=200), nullable=False),
+    sa.Column('path_inference_scratch', sa.String(length=200), nullable=False),
+    sa.Column('path_inference_spacing', sa.String(length=200), nullable=False),
     sa.Column('is_inspected', sa.Boolean(), nullable=False),
     sa.Column('inspected_on', sa.DateTime(), nullable=True),
-    sa.Column('path_inspect_dent', sa.String(length=100), nullable=True),
-    sa.Column('path_inspect_scratch', sa.String(length=100), nullable=True),
-    sa.Column('path_inspect_spacing', sa.String(length=100), nullable=True),
+    sa.Column('path_inspect_dent', sa.String(length=200), nullable=True),
+    sa.Column('path_inspect_scratch', sa.String(length=200), nullable=True),
+    sa.Column('path_inspect_spacing', sa.String(length=200), nullable=True),
     sa.Column('inspector', sa.String(length=10), nullable=True),
     sa.ForeignKeyConstraint(['event_id'], ['event.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id'),
