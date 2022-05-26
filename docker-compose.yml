@@ -1,5 +1,16 @@
 version: "3.7"
 services:
+  flask-admin-nginx:
+    container_name: flask-admin-nginx
+    image: nginx
+    restart: always
+    networks:
+      - flask-admin-net
+    depends_on:
+      - flask-admin
+    ports:
+      - 80:80
+
   flask-admin:
     container_name: flask-admin
     image: flask-admin
