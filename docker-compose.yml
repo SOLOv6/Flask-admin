@@ -11,7 +11,7 @@ services:
     depends_on:
       - flask-admin
     ports:
-      - 80:80
+      - "80:80"
 
   flask-admin:
     container_name: flask-admin
@@ -20,7 +20,7 @@ services:
     networks:
       - flask-admin-net
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - mysqldb
     volumes:
@@ -31,6 +31,8 @@ services:
       - FLASK_ENV=${FLASK_ENV:-development}
       - SQLALCHEMY_DATABASE_URI=${SQLALCHEMY_DATABASE_URI}
     command: ["sh", "./etc/docker-entrypoint.sh"]
+    links:
+      - mysqldb
 
   mysqldb:
     container_name: mysqldb
@@ -44,7 +46,7 @@ services:
       - --character-set-server=utf8
       - --collation-server=utf8_general_ci
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - solovolume:/var/lib/mysql
     restart: always
