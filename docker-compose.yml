@@ -26,13 +26,13 @@ services:
     volumes:
       - ./:/flask-admin
     restart: always
+    links:
+      - mysqldb
     environment:
       - FLASK_APP=project
       - FLASK_ENV=${FLASK_ENV:-development}
       - SQLALCHEMY_DATABASE_URI=${SQLALCHEMY_DATABASE_URI}
     command: ["sh", "./etc/docker-entrypoint.sh"]
-    links:
-      - mysqldb
 
   mysqldb:
     container_name: mysqldb

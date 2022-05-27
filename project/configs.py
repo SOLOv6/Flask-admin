@@ -1,17 +1,10 @@
 import os
-from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(__file__)
-load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 class Config:
     """ Flask Config """
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}:3306/{dbname}?charset=utf8'.format(
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        host=os.getenv('DB_HOST'),
-        dbname=os.getenv('DB_NAME')
-    )
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@mysqldb:3306/solodb?charset=utf8'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     def __init__(self):
