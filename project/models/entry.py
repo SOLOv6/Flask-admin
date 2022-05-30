@@ -9,7 +9,7 @@ class Entry(db.Model):
 
     # Inference
     is_inferenced = db.Column(db.Boolean(), default=True, nullable=False)
-    inferenced_on = db.Column(db.DateTime(), default=func.now(), nullable=False)
+    inferenced_on = db.Column(db.DateTime(), server_default=func.now())
     path_inference_dent = db.Column(db.String(200),unique=True, nullable=False)
     path_inference_scratch = db.Column(db.String(200),unique=True, nullable=False)
     path_inference_spacing = db.Column(db.String(200),unique=True, nullable=False)

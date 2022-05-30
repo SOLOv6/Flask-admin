@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1c1e74583340
+Revision ID: 191d14b416fe
 Revises: 
-Create Date: 2022-05-30 18:15:43.973240
+Create Date: 2022-05-30 22:15:20.740240
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1c1e74583340'
+revision = '191d14b416fe'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,13 +21,13 @@ def upgrade():
     op.create_table('car',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('car_name', sa.String(length=10), nullable=False),
-    sa.Column('registered_on', sa.DateTime(), nullable=False),
+    sa.Column('registered_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_name', sa.String(length=10), nullable=False),
-    sa.Column('registered_on', sa.DateTime(), nullable=False),
+    sa.Column('registered_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('event',
@@ -35,7 +35,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('car_id', sa.Integer(), nullable=True),
     sa.Column('path_original', sa.String(length=200), nullable=False),
-    sa.Column('created_on', sa.DateTime(), nullable=False),
+    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.Column('is_damaged', sa.Boolean(), nullable=True),
     sa.Column('conf_score', sa.Float(), nullable=True),
     sa.ForeignKeyConstraint(['car_id'], ['car.id'], ondelete='CASCADE'),
@@ -47,7 +47,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
     sa.Column('is_inferenced', sa.Boolean(), nullable=False),
-    sa.Column('inferenced_on', sa.DateTime(), nullable=False),
+    sa.Column('inferenced_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.Column('path_inference_dent', sa.String(length=200), nullable=False),
     sa.Column('path_inference_scratch', sa.String(length=200), nullable=False),
     sa.Column('path_inference_spacing', sa.String(length=200), nullable=False),
