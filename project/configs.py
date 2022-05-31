@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 class Config:
     """ Flask Config """
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@3.39.180.133:3306/solodb?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@34.64.87.88:3306/solodb?charset=utf8'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     def __init__(self):
