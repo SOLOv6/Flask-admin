@@ -80,7 +80,7 @@
     text-align: center;
 }
 
-.is_inferenced-box h4 {
+.is_damaged-box h4 {
     font-weight: 700;
 }
 
@@ -114,7 +114,8 @@
     box-shadow: 0px 0px 10px rgb(101, 100, 100);
 }
 
-.is_inferenced-box {
+.is_damaged-box {
+    width: 50px;
     height: 100%;
     margin-left: 100px;
     display: flex;

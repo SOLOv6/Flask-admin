@@ -97,7 +97,7 @@
                     <div class="col-2 info-image-box-col ms-3">dent</div>
                     <div class="col-2 info-image-box-col ms-2">scratch</div>
                     <div class="col-2 info-image-box-col ms-1 me-5">spacing</div>
-                    <div class="col-2 info-image-box-col ms-3">is_inferenced</div>
+                    <div class="col-2 info-image-box-col ms-3">is_damaged</div>
                     <div class="col-2 info-image-box-col ms-5">inspect</div>
                 </div>
                 {% for path_inference in path_inference_list %}
@@ -111,8 +111,20 @@
                     <div class="card mb-3 ms-2 me-5 mt-3 image-card">
                         <img src="https://storage.googleapis.com/solov6-test-storage/path_inference_spacing/{{ path_inference }}.jpeg" class="card-img-top" alt="{{ path_inference }}.jpeg">
                     </div>
-                    <div class="is_inferenced-box">
-                        <h4>{{ entry.is_inferenced }}</h4>
+                    <div class="is_damaged-box">
+                        {% if loop.index == 1 %}
+                        <h4>{{ entry.event.is_damaged_1 }}</h4>
+                        {% elif loop.index == 2 %}
+                        <h4>{{ entry.event.is_damaged_2 }}</h4>
+                        {% elif loop.index == 3 %}
+                        <h4>{{ entry.event.is_damaged_3 }}</h4>
+                        {% elif loop.index == 4 %}
+                        <h4>{{ entry.event.is_damaged_4 }}</h4>
+                        {% elif loop.index == 5 %}
+                        <h4>{{ entry.event.is_damaged_5 }}</h4>
+                        {% elif loop.index == 6 %}
+                        <h4>{{ entry.event.is_damaged_6 }}</h4>
+                        {% endif %}
                     </div>
                     {% if entry.is_inspected %}
                     <div class="inspect-box">
@@ -138,9 +150,6 @@
         </div>
     </div>
 </div>
-{% if path_inference %}
-{{ path_inference }}
-{% endif %}
 {% else %}
 <!-- Main -->
 <div class="main">
