@@ -1,6 +1,6 @@
 # Libraries
 from flask import Blueprint, redirect, render_template, request, g, url_for
-from sqlalchemy import and_, func
+from sqlalchemy import and_, func, or_
 
 # DB Models
 from project.models.event import Event as EventModel
@@ -18,8 +18,13 @@ def index():
     input_to = request.args.get('input_to', default='')
     page = request.args.get('page', type=int ,default=1)
     needle = request.args.get('needle', type=str, default='')
-    event_list = EventModel.query.filter(
-        EventModel.is_damaged != None
+    event_list = EventModel.query.filter(or_(
+        EventModel.is_damaged_1 != None,
+        EventModel.is_damaged_2 != None,
+        EventModel.is_damaged_3 != None,
+        EventModel.is_damaged_4 != None,
+        EventModel.is_damaged_5 != None,
+        EventModel.is_damaged_6 != None,)
     ).order_by(
         EventModel.created_on.desc()
     )

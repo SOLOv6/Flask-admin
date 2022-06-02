@@ -77,7 +77,12 @@
         </div>
         {% if event_list %}
             {% for event in event_list.items %}
-            {% if event.is_damaged == False %}
+            {% if ((event.is_damaged_1 == False) and 
+                (event.is_damaged_2 == False) and 
+                (event.is_damaged_3 == False) and
+                (event.is_damaged_4 == False) and
+                (event.is_damaged_5 == False) and
+                (event.is_damaged_6 == False)): %}
             <div class="card my-2">
                 <div class="card-body">
                     <div class="row card-body-row">
@@ -103,7 +108,12 @@
                     </div>
                 </div>
             </div>
-            {% elif event.is_damaged == True %}
+            {% elif ((event.is_damaged_1 == True) or 
+                (event.is_damaged_2 == True) or 
+                (event.is_damaged_3 == True) or
+                (event.is_damaged_4 == True) or
+                (event.is_damaged_5 == True) or
+                (event.is_damaged_6 == True)): %}
             {% if event.conf_score %}
             {% if event.conf_score > 0.4 %}
             <div class="card my-2">
