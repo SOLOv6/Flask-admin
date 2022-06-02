@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f6b57dc50bbe
+Revision ID: 47221fd0f4d1
 Revises: 
-Create Date: 2022-05-31 12:14:02.648371
+Create Date: 2022-06-02 10:32:54.402378
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f6b57dc50bbe'
+revision = '47221fd0f4d1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,7 +36,12 @@ def upgrade():
     sa.Column('car_id', sa.Integer(), nullable=True),
     sa.Column('path_original', sa.String(length=200), nullable=False),
     sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.Column('is_damaged', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_1', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_2', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_3', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_4', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_5', sa.Boolean(), nullable=True),
+    sa.Column('is_damaged_6', sa.Boolean(), nullable=True),
     sa.Column('conf_score', sa.Float(), nullable=True),
     sa.ForeignKeyConstraint(['car_id'], ['car.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),

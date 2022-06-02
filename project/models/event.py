@@ -9,7 +9,12 @@ class Event(db.Model):
     car_id = db.Column(db.Integer, db.ForeignKey('car.id', ondelete='CASCADE'))
     path_original = db.Column(db.String(200), unique=True, nullable=False)
     created_on = db.Column(db.DateTime(), server_default=func.now())
-    is_damaged = db.Column(db.Boolean(), nullable=True)
+    is_damaged_1 = db.Column(db.Boolean(), nullable=True)
+    is_damaged_2 = db.Column(db.Boolean(), nullable=True)
+    is_damaged_3 = db.Column(db.Boolean(), nullable=True)
+    is_damaged_4 = db.Column(db.Boolean(), nullable=True)
+    is_damaged_5 = db.Column(db.Boolean(), nullable=True)
+    is_damaged_6 = db.Column(db.Boolean(), nullable=True)
     conf_score = db.Column(db.Float, nullable=True)
     
     # Set Backref
