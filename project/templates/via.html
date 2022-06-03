@@ -1334,6 +1334,7 @@ function file_region() {
 // Initialization routine
 //
 function _via_init() {
+  var input = { 'absolute_path': { type:'text', name:'add one absolute path', value:'https://storage.googleapis.com/solov6-test-storage/path_original/{{ path_original }}', disabled:false, size:50 }};
   console.log(VIA_NAME);
   show_message(VIA_NAME + ' (' + VIA_SHORT_NAME + ') version ' + VIA_VERSION +
                '. Ready !', 2*VIA_THEME_MESSAGE_TIMEOUT_MS);
@@ -1373,6 +1374,7 @@ function _via_init() {
       await _via_load_submodules();
     }, 100);
   }
+  project_file_add_abs_path_input_done(input)
 
 }
 

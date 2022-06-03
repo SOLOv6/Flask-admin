@@ -55,7 +55,7 @@ def detail(id):
 @blueprint.route('/detail/inspect')
 def inspect():
     path_original = request.args['path_original']
-    return render_template('via.html')
+    return render_template('via.html', path_original=path_original)
 
 # Confirm Inspection
 @blueprint.route('/detail/<int:id>/confirm', methods=['POST'])
