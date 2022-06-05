@@ -1377,6 +1377,9 @@ function _via_init() {
   project_file_add_abs_path_input_done(input)
   add_new_attribute_from_param('class')
   attribute_property_on_update_checkbox()
+  attribute_property_on_option_add_param('dent')
+  attribute_property_on_option_add_param('scratch')
+  attribute_property_on_option_add_param('spacing')
 }
 
 function _via_init_reg_canvas_context() {
@@ -6749,6 +6752,20 @@ function attribute_property_on_option_add(p) {
       attribute_property_reset_new_entry_inputs();
     }
   }
+}
+
+function attribute_property_on_option_add_param(param) {
+    var attr_id = 'class';
+    var option_id = param;
+    var option_id_test = attribute_property_option_id_is_valid(attr_id, option_id);
+    if ( option_id_test.is_valid ) {
+        _via_attributes[_via_attribute_being_updated][attr_id].options[option_id] = '';
+        show_attribute_options();
+        annotation_editor_update_content();
+    } else {
+        show_message( option_id_test.message );
+        attribute_property_reset_new_entry_inputs();
+    }
 }
 
 function attribute_property_reset_new_entry_inputs() {
