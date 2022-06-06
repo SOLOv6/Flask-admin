@@ -1,1 +1,6 @@
-{{ form }}
+<form action="{{ url_for('register') }}" method="POST">
+    {{ form.admin_name.label }} {{ form.admin_name(minlength=4, maxlength=20) }}
+    {{ form.password.label }} {{ form.password(minlength=4, maxlength=20) }}
+    {{ form.repassword.label }} {{ form.repassword(minlength=4, maxlength=20) }}
+    {{ form.errors }}
+</form>

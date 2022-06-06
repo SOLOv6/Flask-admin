@@ -2,6 +2,8 @@
 from flask import Flask, g, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
+
 
 """
 # SQLite Settings
@@ -14,7 +16,7 @@ naming_convention = {
 }
 """
 
-
+csrf = CSRFProtect()
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -41,6 +43,9 @@ def create_app(config=None):
 
     print('run with', config)
     app.config.from_object(config)
+
+    ''' CSRF INIT '''
+    csrf.init_app(app)
 
     ''' DB INIT '''
     db.init_app(app)
