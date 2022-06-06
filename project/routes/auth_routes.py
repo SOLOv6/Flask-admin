@@ -1,5 +1,5 @@
 # Libraries
-from flask import Blueprint, render_template
+from flask import Blueprint, redirect, render_template, url_for
 
 # DB Models
 from project.models.admin import Admin as AdminModel
@@ -14,11 +14,17 @@ blueprint = Blueprint(
     url_prefix='/auth'
 )
 
+# Get Login Route (Redirect)
+@blueprint.route('/')
+def index():
+    return redirect(url_for('auth.login'))
+
+# Get Login Route
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
-    # check method 'POST' and validate is OK 
+    # check method 'POST' and validate is OK
     if form.validate_on_submit():
         # TODO
         # 1) 유저 조회
@@ -34,10 +40,12 @@ def login():
 
     return render_template('login.html', form=form)
 
+# Get Register Route
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
 
+    # check method 'POST' and validate is OK
     if form.validate_on_submit():
         # TODO
         # 1) 유저 조회
@@ -54,6 +62,7 @@ def register():
 
     return render_template('register.html', form=form)
 
+# Get Logout Route
 @blueprint.route('/logout')
 def logout():
     return 'logout'
