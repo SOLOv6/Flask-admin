@@ -53,6 +53,66 @@
     opacity: 1;
 }
 
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 180px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.profile-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.274);
+}
+
+.user-check {
+    color: rgb(26, 209, 44);
+    font-size: 25px;
+}
+
+.user-not-check {
+    color: rgb(205, 36, 36);
+    font-size: 25px;
+}
+
+.profile p {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+}
+
+.profile a {
+    text-decoration: none;
+}
+
+.login-btn i,
+.logout-btn i {
+    font-size: 20px;
+    color: aliceblue;
+    transition: color 0.15s ease-in-out;
+}
+
+.login-btn i:hover,
+.logout-btn i:hover {
+    color: rgb(191, 20, 20);
+}
 
 /* Main */
 .main {

@@ -32,17 +32,25 @@
             </ul>
             <div class="profile">
                 {% if g.admin %}
-                <i class="fa-solid fa-user-check"></i>
-                <p>{{ g.admin.admin_name }}</p>
-                <a href="{{ url_for('auth.logout') }}" class="logout-btn">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </a>
+                <div class="profile-user ms-2">
+                    <i class="fa-solid fa-user-check user-check me-3"></i>
+                    <p>{{ g.admin.admin_name }}</p>
+                </div>
+                <div class="profile-log">
+                    <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </div>
                 {% else %}
-                <i class="fa-solid fa-user-xmark"></i>
-                <p>Login</p>
-                <a href="{{ url_for('auth.login') }}" class="login-btn">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                </a>
+                <div class="profile-user ms-2">
+                    <i class="fa-solid fa-user-xmark user-not-check me-3"></i>
+                    <p>Login</p>
+                </div>
+                <div class="profile-log">
+                    <a href="{{ url_for('auth.login') }}" class="login-btn">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    </a>
+                </div>
                 {% endif %}
             </div>
         </div>
