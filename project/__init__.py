@@ -48,6 +48,7 @@ def create_app(config=None):
         migrate.init_app(app, db, render_as_batch=True)
     else:
         migrate.init_app(app, db)
+    from . import models
 
     ''' Routes INIT '''
     from project.routes import base_routes, auth_routes, car_routes, user_routes

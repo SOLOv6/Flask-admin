@@ -1,4 +1,8 @@
+# Libraries
 from flask import Blueprint
+
+# DB Models
+from project.models.admin import Admin as AdminModel
 
 blueprint = Blueprint(
     'auth',
