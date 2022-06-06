@@ -15,6 +15,8 @@ blueprint = Blueprint(
 # Get Car List Route
 @blueprint.route('/')
 def cars():
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     page = request.args.get('page', type=int, default=1)
     needle = request.args.get('needle', type=str, default='')
     car_list = CarModel.query.order_by(CarModel.registered_on.desc())
@@ -28,6 +30,8 @@ def cars():
 # Register Car Route
 @blueprint.route('/register', methods=['POST'])
 def register():
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     car_name = request.form['car_name']
     car = CarModel(car_name=car_name)
     g.db.add(car)
@@ -37,6 +41,8 @@ def register():
 # Delete Car Route
 @blueprint.route('/delete', methods=['POST'])
 def delete():
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     car_id = request.form['car_id']
     car = CarModel.query.get_or_404(car_id)
     g.db.delete(car)

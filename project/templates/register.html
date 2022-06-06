@@ -1,8 +1,38 @@
-{% include '_errors.html' %}
-<form action="{{ url_for('auth.register') }}" method="POST">
-    {{ form.csrf_token }}
-    {{ form.admin_name.label }} {{ form.admin_name(minlength=4, maxlength=20) }}
-    {{ form.password.label }} {{ form.password(minlength=4, maxlength=20) }}
-    {{ form.repassword.label }} {{ form.repassword(minlength=4, maxlength=20) }}
-    <input type="submit" value="Sign Up">
-</form>
+{% extends 'base.html' %}
+{% block head %}
+<!-- CSS INIT -->
+<link rel="stylesheet" href="../static/css/register.css">
+{% endblock %}
+
+{% block content %}
+<div class="register-form">
+    <div class="form-logo mb-3">
+        <img src="../static/images/favicons.ico/apple-icon-114x114.png" alt="logo.png" width="60px" height="60px">
+    </div>
+    <div class="form-header mb-3">
+        <p class="form-title">Sign Up</p>
+        <p class="form-text">Already a member? <a href="{{ url_for('auth.login') }}">Sign In<i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a></p>
+    </div>
+    <form class="register-form-main" action="{{ url_for('auth.register') }}" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-floating mb-3">
+            {{ form.admin_name(minlength=4, maxlength=20, class="form-control", id="floatingInput", placeholder="Admin Name", autocomplete='off') }}
+            <label for="floatingInput">Admin Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.password(minlength=4, maxlength=20, class="form-control", id="floatingPassword", placeholder="Password") }}
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.repassword(minlength=4, maxlength=20, class="form-control", id="floatingPassword", placeholder="Confirm Password") }}
+            <label for="floatingPassword">Confirm Password</label>
+        </div>
+        <div class="error-box mb-2">
+            {% include '_errors.html' %}
+        </div>
+        <div class="btn-box">
+            <button type="submit" class="btn btn-primary submit-btn">Sign Up</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

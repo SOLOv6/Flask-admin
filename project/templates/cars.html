@@ -45,6 +45,7 @@
     <div class="register-box">
         <div class="register-col">
             <form class="register-form" action="{{ url_for('cars.register') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <input class="form-control register-input" type="text" name="car_name" placeholder="Model name...">
                 <button type="submit" class="btn btn-primary mb-3 register-btn">
                     Register
@@ -89,6 +90,7 @@
                             {{ car.registered_on }}
                             <div class="cancel-box">
                                 <form class="delete-form" action="{{ url_for('cars.delete') }}" method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                     <input class="delete-car-id-input" type="hidden" name="car_id" value="{{ car.id }}">
                                     <button type="submit" class="btn btn-danger mb-3 cancel-btn">
                                         <i class="fa-solid fa-xmark"></i>

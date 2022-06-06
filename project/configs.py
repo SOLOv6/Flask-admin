@@ -19,6 +19,7 @@ class DevelopmentConfig(Config):
     """ Flask Config for Dev """
     DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = None
+    WTF_CSRF_ENABLED = False
 
 
 class TestingConfig(Config):

@@ -30,6 +30,21 @@
                     <a class="nav-link active" href="{{ url_for('users.users') }}">Users</a>
                 </li>
             </ul>
+            <div class="profile">
+                {% if g.admin %}
+                <i class="fa-solid fa-user-check"></i>
+                <p>{{ g.admin.admin_name }}</p>
+                <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+                {% else %}
+                <i class="fa-solid fa-user-xmark"></i>
+                <p>Login</p>
+                <a href="{{ url_for('auth.login') }}" class="login-btn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>

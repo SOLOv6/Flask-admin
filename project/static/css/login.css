@@ -1,0 +1,73 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    height: 500px;
+    padding: 48px 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.form-logo img {
+    border-radius: 7px;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.form-text {
+    text-align: center;
+}
+
+.login-form-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.error-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.error-message {
+    color: rgb(194, 40, 40);
+}
+
+.exclamation {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 2px solid rgb(194, 40, 40);
+    border-radius: 50%;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-account-btn {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.submit-btn {
+    width: 100px;
+}

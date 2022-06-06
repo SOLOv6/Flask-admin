@@ -1,7 +1,35 @@
-{% include '_errors.html' %}
-<form action="{{ url_for('auth.login') }}" method="POST">
-    {{ form.csrf_token }}
-    {{ form.admin_name.label }} {{ form.admin_name(minlength=4, maxlength=20) }}
-    {{ form.password.label }} {{ form.password(minlength=4, maxlength=20) }}
-    <input type="submit" value="Sign In">
-</form>
+{% extends 'base.html' %}
+{% block head %}
+<!-- CSS INIT -->
+<link rel="stylesheet" href="../static/css/login.css">
+{% endblock %}
+
+{% block content %}
+<div class="login-form">
+    <div class="form-logo mb-3">
+        <img src="../static/images/favicons.ico/apple-icon-114x114.png" alt="logo.png" width="60px" height="60px">
+    </div>
+    <div class="form-header mb-3">
+        <p class="form-title">Sign In</p>
+        <p class="form-text">Admin Dashboard</p>
+    </div>
+    <form class="login-form-main" action="{{ url_for('auth.login') }}" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-floating mb-3">
+            {{ form.admin_name(minlength=4, maxlength=20, class="form-control", id="floatingInput", placeholder="Admin Name", autocomplete='off') }}
+            <label for="floatingInput">Admin Name</label>
+        </div>
+        <div class="form-floating">
+            {{ form.password(minlength=4, maxlength=20, class="form-control", id="floatingPassword", placeholder="Password") }}
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="error-box mb-2">
+            {% include '_errors.html' %}
+        </div>
+        <div class="btn-box">
+            <a href="{{ url_for('auth.register') }}" class="create-account-btn">Create Account<i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+            <button type="submit" class="btn btn-primary submit-btn">Sign In</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

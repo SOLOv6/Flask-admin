@@ -1,9 +1,8 @@
 # Libraries
-from flask import Blueprint, redirect, render_template, url_for, flash, session, request
+from flask import Blueprint, redirect, render_template, url_for, flash, session, request, g
 from werkzeug import security
 
 # DB Models
-from project import db
 from project.models.admin import Admin as AdminModel
 
 # Flask Forms
@@ -16,6 +15,17 @@ blueprint = Blueprint(
     url_prefix='/auth'
 )
 
+# Request Hook for entire app
+@blueprint.before_app_request
+def before_app_request():
+    g.admin = None
+    admin_name = session.get('admin_name')
+    if admin_name:
+        admin = AdminModel.find_one_by_admin_name(admin_name)
+        if admin:
+            g.admin = admin
+        else:
+            session.pop('admin_name', None)
 
 # Get Login Route (Redirect)
 @blueprint.route('/')
@@ -53,11 +63,6 @@ def register():
 
     # check method 'POST' and validate is OK
     if form.validate_on_submit():
-        # TODO
-        # 1) 유저 조회
-        # 2) 유저가 이미 존재하는지 확인
-        # 3) 없으면 유저 생성
-        # 4) 로그인 유지(Session)
         admin_name = form.data.get('admin_name')
         password = form.data.get('password')
         repassword = form.data.get('repassword')
@@ -66,14 +71,14 @@ def register():
             flash('Admin Name already exists.')
             return redirect(request.path)
         else:
-            db.session.add(
+            g.db.add(
                 AdminModel(
                     admin_name=admin_name,
                     password=security.generate_password_hash(password)
                 )
             )
-            db.session.commit()
-            session['admin_name'] = admin.admin_name
+            g.db.commit()
+            session['admin_name'] = admin_name
             return redirect(url_for('base.index'))
     else:
         flash_form_errors(form)

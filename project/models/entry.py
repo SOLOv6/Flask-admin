@@ -20,7 +20,7 @@ class Entry(db.Model):
     path_inspect_dent = db.Column(db.String(200),unique=True, nullable=True)
     path_inspect_scratch = db.Column(db.String(200),unique=True, nullable=True)
     path_inspect_spacing = db.Column(db.String(200),unique=True, nullable=True)
-    inspector = db.Column(db.String(10), nullable=True)
+    inspector = db.Column(db.String(20), nullable=True)
 
     # Set Backref
     event = db.relationship('Event', backref=db.backref('event_set'))

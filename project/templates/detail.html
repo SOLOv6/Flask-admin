@@ -81,7 +81,8 @@
                         <h5 class="inspector-box-status-text confirm-disabled">Confirmed! <i class="fa-solid fa-check check-icon"></i></h5>
                         {% else %}
                         <form action="{{ url_for('base.confirm', id=entry.event.id) }}" method="post">
-                            <input class="inspector-input" type="hidden" name="inspector" value="Admin">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <input class="inspector-input" type="hidden" name="inspector" value="{{ g.admin.admin_name }}">
                             <button type="submit" class="btn mb-3 btn-success confirm-btn">
                                 Confirmed! <i class="fa-solid fa-check check-icon"></i>
                             </button>

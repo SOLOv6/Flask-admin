@@ -14,6 +14,8 @@ blueprint = Blueprint(
 # Get Event List Route
 @blueprint.route('/')
 def index():
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     input_from = request.args.get('input_from', default='')
     input_to = request.args.get('input_to', default='')
     page = request.args.get('page', type=int ,default=1)
@@ -45,6 +47,8 @@ def index():
 # Get Event Detail Route
 @blueprint.route('/detail/<int:id>')
 def detail(id):
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     entry = EntryModel.query.filter(EntryModel.event_id == id).first()
     if entry is None:
         return render_template('detail.html', entry=entry)
@@ -54,12 +58,16 @@ def detail(id):
 # Get Event Inspect Route
 @blueprint.route('/detail/inspect')
 def inspect():
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     path_original = request.args['path_original']
     return render_template('via.html', path_original=path_original)
 
 # Confirm Inspection
 @blueprint.route('/detail/<int:id>/confirm', methods=['POST'])
 def confirm(id):
+    if not g.admin:
+        return redirect(url_for('auth.login'))
     if request.method == 'POST':
         inspector = request.form['inspector']
         inspected_on = func.now()
