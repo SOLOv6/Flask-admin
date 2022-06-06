@@ -1,7 +1,9 @@
 # Libraries
-from flask import Blueprint, redirect, render_template, url_for, flash
+from flask import Blueprint, redirect, render_template, url_for, flash, session, request
+from werkzeug import security
 
 # DB Models
+from project import db
 from project.models.admin import Admin as AdminModel
 
 # Flask Forms
@@ -13,6 +15,7 @@ blueprint = Blueprint(
     __name__,
     url_prefix='/auth'
 )
+
 
 # Get Login Route (Redirect)
 @blueprint.route('/')
@@ -26,14 +29,18 @@ def login():
 
     # check method 'POST' and validate is OK
     if form.validate_on_submit():
-        # TODO
-        # 1) 유저 조회
-        # 2) 존재하는 유저인지 확인
-        # 3) 패스워드 정합성 확인
-        # 4) 로그인 유지(Session)
         admin_name = form.data.get('admin_name')
         password = form.data.get('password')
-        return f'{admin_name}, {password}'
+        admin = AdminModel.find_one_by_admin_name(admin_name)
+        if admin:
+            if not security.check_password_hash(admin.password, password):
+                flash('Password is not valid.')
+            else:
+                session['admin_name'] = admin.admin_name
+                return redirect(url_for('base.index'))
+
+        else:
+            flash('Admin Name does not exists.')
     else:
         flash_form_errors(form)
 
@@ -54,7 +61,20 @@ def register():
         admin_name = form.data.get('admin_name')
         password = form.data.get('password')
         repassword = form.data.get('repassword')
-        return f'{admin_name}, {password}, {repassword}'
+        admin = AdminModel.find_one_by_admin_name(admin_name)
+        if admin:
+            flash('Admin Name already exists.')
+            return redirect(request.path)
+        else:
+            db.session.add(
+                AdminModel(
+                    admin_name=admin_name,
+                    password=security.generate_password_hash(password)
+                )
+            )
+            db.session.commit()
+            session['admin_name'] = admin.admin_name
+            return redirect(url_for('base.index'))
     else:
         flash_form_errors(form)
 
@@ -63,7 +83,8 @@ def register():
 # Get Logout Route
 @blueprint.route('/logout')
 def logout():
-    return 'logout'
+    session.pop('admin_name', None)
+    return redirect(url_for('auth.login'))
 
 
 def flash_form_errors(form):

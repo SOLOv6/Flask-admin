@@ -4,7 +4,8 @@ BASE_DIR = os.path.dirname(__file__)
 
 class Config:
     """ Flask Config """
-    SECRET_KEY = 'solodb'
+    SECRET_KEY = 'solov6'
+    SESSION_COOKIE_NAME = 'solov6admin'
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@3.39.180.133:3306/solodb?charset=utf8'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
