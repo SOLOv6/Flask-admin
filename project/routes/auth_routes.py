@@ -1,5 +1,5 @@
 # Libraries
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, url_for, flash
 
 # DB Models
 from project.models.admin import Admin as AdminModel
@@ -35,8 +35,7 @@ def login():
         password = form.data.get('password')
         return f'{admin_name}, {password}'
     else:
-        # TODO: Error
-        pass
+        flash_form_errors(form)
 
     return render_template('login.html', form=form)
 
@@ -57,8 +56,7 @@ def register():
         repassword = form.data.get('repassword')
         return f'{admin_name}, {password}, {repassword}'
     else:
-        # TODO: Error
-        pass
+        flash_form_errors(form)
 
     return render_template('register.html', form=form)
 
@@ -66,3 +64,9 @@ def register():
 @blueprint.route('/logout')
 def logout():
     return 'logout'
+
+
+def flash_form_errors(form):
+    for _, errors in form.errors.items():
+        for e in errors:
+            flash(e)
