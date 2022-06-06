@@ -70,7 +70,7 @@
                     <label for="endDate" id="input_to" class="calendar-input-label">To</label>
                     <input id="endDate" class="form-control calendar-input" type="date" name="input_to" value="{{ input_to or '' }}"/>
                     <div id="calendar-input-bar"></div>
-                    <input id="needle search-needle" class="form-control calendar-input" type="text" name="needle" value="{{ needle or '' }}" placeholder="Car ID..." aria-label="Search">
+                    <input id="needle search-needle" class="form-control calendar-input" type="text" name="needle" value="{{ needle or '' }}" placeholder="Car ID..." aria-label="Search" autocomplete="off">
                     <input id="page" type="hidden" name="page" value=1>
                 </div>
                 <div class="col calendar-btn-box">
