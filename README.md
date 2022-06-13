@@ -103,3 +103,41 @@
 <p align="center">
     <img width="971" alt="image" src="https://user-images.githubusercontent.com/85675215/173314826-894827f1-de72-4f20-b52c-219b556335e0.png">
 </p>
+
+전체 프로젝트의 **Flow Chart** 는 위와 같습니다.
+<br>
+크게 **Web**, **Model**, **GCS**, **DB** 로 구분할 수 있으며, 다음과 같은 역할을 수행합니다.
+<br>
+<br>
+
+### Web
+
+- User 는 차량을 대여하기 전, **6장의 차량 사진을 업로드**합니다.
+- Admin Dashboard 에서는 DB 에 저장된 Model 의 **추론 결과 데이터들을 로드하여 랜더링**합니다.
+
+<br>
+
+### Model
+
+- GDC 는 Global Damage Classifier 로, 차량 이미지들을 입력으로 받아 **파손 유무**를 확인합니다.
+- 이는 **파손이 탐지되지 않은 차량들을 사전에 선별**하여 이후 모델(LDD)의 부하를 감소시키기 위함입니다.
+- GDC 에서 파손이 탐지된 차량 이미지들은 이후 LDD(Local Damage Detector) 모델로 전송되고, **파손 종류 분류 및 파손 영역 검출** Task 를 수행합니다.
+- 모든 모델은 **Torch Serve** 를 통해 서빙되며, 모델의 추론 결과는 **Google Cloud Function** 을 통해 DB 에 저장됩니다.
+
+<br>
+
+### GCS
+
+- Google Cloud Storage 는 **실제 이미지들이 저장되는 저장소**입니다.
+- User 가 **업로드한 차량 이미지**, LDD 를 통과한 **마스크 이미지** 등이 저장됩니다.
+- **HTML Form** 혹은 **Rest API** 를 통해 웹과 통신합니다.
+- **GCF**(Google Cloud Function)는 해당 스토리지의 모든 이벤트를 감지하고 있으며, 유저의 업로드 **이벤트가 발생할 경우 Trigger 되는 Function** 입니다.
+- **GCF** 를 통해 input 이미지들이 **모델에 순차적으로 입력**되고, 모델의 **추론 결과가 DB 에 저장**됩니다.
+
+<br>
+
+### DB
+
+- DB 는 **MySQL 5.7** 버전을 사용하였습니다.
+- **Admin**, **User**, **Car**, **Event**, **Entry** 의 총 5 개 테이블로 이루어져 있습니다.
+- Admin Dashboard 에서는 해당 DB 에서 모든 데이터를 로드하고 화면에 랜더링합니다.
