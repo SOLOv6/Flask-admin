@@ -99,3 +99,7 @@
 <br>
 
 ## Project Flow
+
+<p align="center">
+    <img width="971" alt="image" src="https://user-images.githubusercontent.com/85675215/173314826-894827f1-de72-4f20-b52c-219b556335e0.png">
+</p>
