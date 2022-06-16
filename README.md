@@ -141,3 +141,82 @@
 - DB 는 **MySQL 5.7** 버전을 사용하였습니다.
 - **Admin**, **User**, **Car**, **Event**, **Entry** 의 총 5 개 테이블로 이루어져 있습니다.
 - Admin Dashboard 에서는 해당 DB 에서 모든 데이터를 로드하고 화면에 랜더링합니다.
+
+<br>
+
+# Admin Dashboard
+
+지금부터는 전체 Project Flow 중 Admin Dashboard 파트에 대해 간단한 설명을 작성하였습니다.
+
+<br>
+
+## Structure
+
+<p align="center">
+    <img width="1385" alt="image" src="https://user-images.githubusercontent.com/85675215/174005676-8e8aa5b0-fb3c-4c43-9d73-fe252c8d0e07.png">
+</p>
+
+Admin Dashboard 의 구조는 위와 같습니다.
+
+먼저, 웹서버와 Wsgi 는 각각 **Nginx** 와 **Gunicorn** 을 사용하였습니다.
+<br>
+사내 관리자 검수화면이므로, 거대 트래픽을 처리해야 하는 상황은 없을 것이라고 가정하고 하나의 서버를 두어 구축하였습니다.
+<br>
+
+API 프레임워크는 **Flask** 를 사용하였습니다.
+<br>
+Django 프레임워크도 고려하였으나, 이후 추가할 Mlops 관련 다양한 기술들 간 호환성을 생각해보았을 때, 비교적 커스터마이징 및 세팅에 있어 자유도가 높은 Flask 프레임워크를 선택하였습니다.
+<br>
+추후에 사용될 기술들이 명확하게 정의되지 않은 상태에서 기술 선택의 제약 및 종속성이 높은 프레임워크를 선택하는 것은 위험하다고 판단하였습니다.
+<br>
+
+DB는 **MySQL 5.7** 버전을 사용하였습니다.
+<br>
+현재로서는 MySQL 의 버전 중 가장 안정적이라고 판단하였으며, 추후 파손 탐지 영역에 대한 Polygon 좌표 값을 배열 형태로 DB 에 담기 위해 PostgreSQL 혹은 mongodb 로 변경할 계획이 있습니다.
+<br>
+
+또한, Nginx, Flask, MySQL 은 각각의 **Docker Container** 로 띄워져 **Docker Compose** 로 관리되고 있습니다.
+<br>
+<br>
+
+## Usecase
+
+<p align="center">
+    <img width="873" alt="image" src="https://user-images.githubusercontent.com/85675215/174030273-749a3e65-c4c3-44f8-a5da-e1f85fe371e7.png">
+</p>
+Admin Dashboard 서비스의 초기 계획된 Usecase 입니다.
+<br>
+
+기본적으로 관리자를 위한 서비스인만큼 사용자 인증을 통해 기능을 사용할 수 있도록 구현하였습니다.
+<br>
+아래에서는 각각의 기능에 대해 정리하였습니다.
+
+- **검색**
+  - 보유한 모든 **차량** 검색
+  - 등록된 모든 **사용자** 검색
+  - 사용자가 차량을 대여한 각각의 **Event** 검색
+    - **날짜** 기준 검색
+    - 특정 **차량 ID** 기준 검색
+
+<br>
+
+- **추가**
+  - **차량** 추가
+  - **사용자** 추가
+
+<br>
+
+- **Event 상세 정보 확인(Entry)**
+
+<br>
+
+- **Inspection**
+
+<br>
+
+- **Confirm**
+
+<br>
+
+사용자가 차량을 대여하는 시점에 사진을 업로드하면 기본적으로 Event 데이터가 생성됩니다.
+이후, 해당 사진에서 차량 파손이 탐지되는 경우에는 **파손 여부**, 모델이 생성한 **마스크 이미지의 경로** 및 모델의 **confidence score** 등의 정보를 포함하는 Entry 데이터가 생성됩니다.
