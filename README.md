@@ -239,3 +239,54 @@ Admin Dashboard 서비스의 초기 계획된 Usecase 입니다.
 #### **Confirm**
 
 > Event 상세 정보 화면에서 관리자가 모델의 추론 결과 이미지를 확인 및 검수한 결과 이상이 발견되지 않았거나, 이상이 발견된 이미지에 대해 Annotate(Inspect) 가 완료된 이후에는 Confirm 버튼을 클릭하여 최종 검수가 완료되었음을 표시하여야 합니다. Confirm 버튼을 클릭하게 되면, 최종 검수 일자와 로그인된 관리자 계정 이름이 화면에 표시되며 각 이미지에 대한 Annotate(Inspect) 버튼이 비활성화됩니다.
+
+<br>
+<br>
+
+## DB ERD
+
+<p align="center">
+    <img width="1099" alt="image" src="https://user-images.githubusercontent.com/85675215/174286470-0bba0f88-f3f8-40c0-ae7f-6831bad657c7.png">
+</p>
+
+Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램**입니다.
+<br>
+각각은 **user_id** 와 **car_id**, **event_id** 로 관계를 맺고 있습니다.
+<br>
+아래는 테이블의 각 컬럼 명세입니다.
+<br>
+<br>
+
+### **User**
+
+- **user_name** : 사용자 이름
+- **registered_on** : 가입일자 및 시각
+
+### **Car**
+
+- **car_name** : 차량 모델명
+- **registered_on** : 등록일자 및 시각
+
+### **Event**
+
+- **user_id** : User 테이블의 기본키(id)
+- **car_id** : Car 테이블의 기본키(id)
+- **path_original** : 업로드 이미지의 경로
+- **created_on** : 대여일자 및 시각
+- **is_damaged** : 업로드 이미지에서 검출된 파손 유무
+- **conf_score** : 파손 유무에 대한 모델의 confidence score
+
+### **Entry**
+
+- **event_id** : Event 테이블의 기본키(id)
+- **is_inferenced** : GDC, LDD 모델 통과 여부(default=True)
+- **inferenced_on** : 모델 통과 일자 및 시각
+- **path_inference_dent** : 파손 클래스가 "dent" 인 마스크 이미지 경로
+- **path_inference_scratch** : 파손 클래스가 "scratch" 인 마스크 이미지 경로
+- **path_inference_spacing** : 파손 클래스가 "spacing" 인 마스크 이미지 경로
+- **is_inspected** : 관리자의 최종 검수 여부(default=False)
+- **inspected_on** : 관리자의 최종 검수 일자 및 시각
+- **path_inspect_dent** : 파손 클래스가 "dent" 인 Annotated 마스크 이미지 경로
+- **path_inspect_scratch** : 파손 클래스가 "scratch" 인 Annotated 마스크 이미지 경로
+- **path_inspect_spacing** : 파손 클래스가 "spacing" 인 Annotated 마스크 이미지 경로
+- **inspector** : 최종 검수한 관리자 ID
