@@ -16,11 +16,12 @@
   - [Structure](#Structure)
   - [Usecase](#Usecase)
   - [DB ERD](#DB-ERD)
-  - [Service Flow](#Service-Flow)
 
 <br>
 
 - [**Demos**](#Demos)
+  - [Admin Dashboard](#Admin-Dashboard)
+  - [Project](#Project)
 
 <br>
 
@@ -290,3 +291,12 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 - **path_inspect_scratch** : 파손 클래스가 "scratch" 인 Annotated 마스크 이미지 경로
 - **path_inspect_spacing** : 파손 클래스가 "spacing" 인 Annotated 마스크 이미지 경로
 - **inspector** : 최종 검수한 관리자 ID
+
+<br>
+<br>
+
+# Demos
+
+구현한 웹서비스의 스크린샷 이미지 및 간단한 시연 영상입니다.
+
+## Admin Dashboard
