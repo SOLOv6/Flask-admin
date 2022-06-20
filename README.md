@@ -397,3 +397,34 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 영상은 **사용자의 차량 사진 업로드**부터 **관리자 검수 완료**까지 전체적인 Flow 를 담고 있습니다.
 <br>
 <br>
+
+- ### **User Upload**
+  ![user-upload](/demos/user-upload.gif)
+
+<br>
+
+- ### **Logs**
+  ![logs](/demos/cloud_func-database.gif)
+
+<br>
+
+- ### **Admin Dashboard - Login & Tabs**
+  ![event](/demos/event.gif)
+
+<br>
+
+- ### **Admin Dashboard - Event details**
+  ![entry_1](/demos/entry_1.gif)
+  ![entry_2](/demos/entry_2.gif)
+
+<br>
+
+- ### **Admin Dashboard - Annotate**
+  ![annotate](/demos/annotate.gif)
+
+<br>
+<br>
+
+# Tech Stack
+
+Admin Dashboard 구현에 활용된 기술들의 Tech Stack 입니다.
