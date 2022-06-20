@@ -300,3 +300,94 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 구현한 웹서비스의 스크린샷 이미지 및 간단한 시연 영상입니다.
 
 ## Admin Dashboard
+
+- ### **Login & Register**
+  - **세션/쿠키 기반 인증** 방식
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174506739-e48d07a4-97fe-412c-96de-3ee313e548a5.png">
+</p>
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174506781-5991eb89-2926-4bf1-9208-e2ec78b99307.png">
+</p>
+
+<br>
+
+- ### **Events**
+  - 네비게이션 바 우측 상단에 **로그인된 관리자 계정** 및 **로그아웃 버튼** 표시
+  - **날짜 및 차량 ID 기반 검색** 기능
+  - 각 Event 의 **파손 여부** 및 **추론 결과 신뢰도**를 **색상으로 구분**하여 직관적으로 확인 가능
+    - **흰색** : 파손이 발견되지 않은 Event
+    - **연분홍색** : 파손이 발견되었으며 Model 의 Confidence Score 가 높은 Event
+    - **빨간색** : 파손이 발견되었으나 Model 의 Confidence Score 가 낮은 Event
+  - 이를 통해 관리자는 **검수 우선순위를 미리 파악**하고, **파손 여부를 인지**함으로서 작업 피로도 감소
+  - 각 Event 최우측에 상세 정보 버튼 추가하여 클릭 시 **상세 정보 화면**으로 이동
+  - **Pagination 기능** 추가하여 10개 레코드씩 화면에 표시
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174506980-c4ab28e2-8c92-49d0-a511-2cea491f687d.png">
+</p>
+
+<br>
+
+- ### **Cars**
+  - 네비게이션 바 우측 상단에 **차량 ID 기준 검색** 기능
+  - 차량의 모델명 입력 후 간단하게 **차량 등록** 가능
+  - 삭제 버튼 추가하여 간단하게 **차량 삭제** 가능
+  - **Pagination 기능** 추가하여 10개 레코드씩 화면에 표시
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174508886-991fd74c-39ae-4aca-b621-3c498d2d4931.png">
+</p>
+
+<br>
+
+- ### **Users**
+  - 네비게이션 바 우측 상단에 **사용자 ID 기준 검색** 기능
+  - 사용자 이름 입력 후 간단하게 **사용자 등록** 가능
+  - 삭제 버튼 추가하여 간단하게 **사용자 삭제** 가능
+  - **Pagination 기능** 추가하여 10개 레코드씩 화면에 표시
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174509255-6524614e-c01f-474d-b9c3-b5a66fcc7585.png">
+</p>
+
+<br>
+
+- ### **Event 상세 정보(Entry)**
+  - Event Page 에서 상세 정보 버튼 클릭하여 **개별 Event 상세 정보 확인** 가능
+  - 선택한 **Event 의 ID**, **대여 날짜 및 시각**, **대여한 사용자**, **차량** 등의 정보 표시
+  - 업로드된 차량 이미지 전체에 대해 **모델이 탐지한 파손 클래스 및 파손 영역이 마스킹**되어 표시
+  - 이미지 각각에 대해 **파손 여부 표시** (is_damaged)
+    - dent, scratch, spacing 클래스 중 **하나의 클래스에서라도 파손이 탐지된다면 True**
+    - dent, scratch, spacing 클래스 중 **어떤 클래스에서도 파손이 탐지되지 않았다면 False**
+  - 관리자가 파손 클래스 및 파손 영역 마스크를 확인 후 **오류를 발견**하였다면, <br> **inspect 버튼을 클릭**하여 직접 **Annotate** 가능
+  - 해당 Event 에 대한 **모든 검수 작업이 종료**되면, **최종 검수 확인 버튼**(Confirmed!)을 클릭
+  - **최종 검수가 완료**되면, **검수자**(현재 관리자 계정 ID) 및 **검수 완료 일자 및 시각**이 저장되고 화면에 표시, inspect 버튼 비활성화
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174509898-bf1faf3e-c59b-4f72-8c93-ad44268723bd.png">
+</p>
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174510004-e5c21f00-d575-4145-9aeb-b67aa6f0b285.png">
+</p>
+
+<br>
+
+- ### **Annotate**
+  - Event 상세 정보 화면에서 **inspect 버튼을 클릭**하면 **라벨링 화면으로 이동**
+  - **VGG Image Annotator(VIA)** 툴의 코드를 일부 수정하여 사용
+    - 수정을 원하는 **원본 이미지를 자동으로 load**
+    - dent, scratch, spacing **3개 클래스 자동으로 load**
+  - 라벨링 작업이 완료되면, **json 파일로 저장**
+    - 해당 파일은 각 클래스에 대한 **Polygon 좌표값**
+  - 좌표값을 읽어 **새로운 마스크 이미지를 생성**하고 **모델 재학습** 가능
+
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/85675215/174512488-c7f3f9aa-dd6e-41b6-8328-93d11c657766.png">
+</p>
+
+<br>
+<br>
+
+## Project
