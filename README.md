@@ -21,7 +21,7 @@
 
 - [**Demos**](#Demos)
   - [Admin Dashboard Service](#Admin-Dashboard-Service)
-  - [Project](#Project)
+  - [Entire Service Flow](#Entire-Service-Flow)
 
 <br>
 
@@ -390,7 +390,7 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 <br>
 <br>
 
-## Project
+## Entire Service Flow
 
 전체 프로젝트의 짧은 시연 영상입니다.
 <br>
