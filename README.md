@@ -20,7 +20,7 @@
 <br>
 
 - [**Demos**](#Demos)
-  - [Admin Dashboard](#Admin-Dashboard)
+  - [Admin Dashboard Service](#Admin-Dashboard-Service)
   - [Project](#Project)
 
 <br>
@@ -299,7 +299,7 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 
 구현한 웹서비스의 스크린샷 이미지 및 간단한 시연 영상입니다.
 
-## Admin Dashboard
+## Admin Dashboard Service
 
 - ### **Login & Register**
   - **세션/쿠키 기반 인증** 방식
