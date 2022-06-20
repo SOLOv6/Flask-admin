@@ -39,7 +39,7 @@
 웹을 통해 모델의 inference 결과를 Admin Dashboard 에서 관리자가 확인 및 검수하여 최종적으로 보유 차량에 대한 파손 이력 관리가 가능하도록 구현하였습니다.
 <br>
 <br>
-**Upccida** 프로젝트의 전반적인 Overview 는 [여기](https://github.com/SOLOv6/solov6-overview)에서 확인이 가능하며, 아래에서는 Flask API 로 구현한 관리자 검수 시스템에 대해 소개합니다.
+**Upccida** 프로젝트의 전반적인 Overview 는 [여기](https://github.com/SOLOv6/solov6-overview)에서 확인이 가능하며, 아래에서는 Flask API 로 구현한 Admin Dashboard 에 대해 소개합니다.
 <br>
 <br>
 
