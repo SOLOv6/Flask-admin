@@ -428,3 +428,23 @@ Admin 테이블을 제외한 4 개 테이블의 **객체-관계 다이어그램*
 # Tech Stack
 
 Admin Dashboard 구현에 활용된 기술들의 Tech Stack 입니다.
+
+<br>
+
+- ### Languages
+<img src='https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white'/> <img src='https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white'/> <img src='https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white'/>
+
+<br>
+
+- ### Frameworks & Libraries
+<img src='https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white'/> <img src='https://img.shields.io/badge/Jinja Templates-B41717?style=for-the-badge&logo=Jinja&logoColor=white'/> <img src='https://img.shields.io/badge/SqlAlchemy-C11920?style=for-the-badge&logo=Swiper&logoColor=white'/>
+
+<br>
+
+- ### DB
+<img src='https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=SQLite&logoColor=white'/> <img src='https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=E48E01'/>
+
+<br>
+
+- ### Deployment & Tools
+<img src='https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white'/> <img src='https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=F0921E'/> <img src='https://img.shields.io/badge/Google_Cloud_Platform-4285F4?style=for-the-badge&logo=GoogleCloud&logoColor=white'/>
