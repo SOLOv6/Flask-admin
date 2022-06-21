@@ -437,7 +437,7 @@ Admin Dashboard 구현에 활용된 기술들의 Tech Stack 입니다.
 <br>
 
 - ### Frameworks & Libraries
-<img src='https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white'/> <img src='https://img.shields.io/badge/Jinja Templates-B41717?style=for-the-badge&logo=Jinja&logoColor=white'/> <img src='https://img.shields.io/badge/SqlAlchemy-C11920?style=for-the-badge&logo=Swiper&logoColor=white'/>
+<img src='https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white'/> <img src='https://img.shields.io/badge/Jinja Templates-B41717?style=for-the-badge&logo=Jinja&logoColor=white'/> <img src='https://img.shields.io/badge/SqlAlchemy-C11920?style=for-the-badge&logo=Swiper&logoColor=white'/> <img src='https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white'/>
 
 <br>
 
